@@ -10,10 +10,10 @@ function Students() {
     const [editingStudentId, setEditingStudentId] = useState(null);
 
     const loadStudents = () => {
-        fetch("/api/students")
+        fetch("/api/faveparks")
             .then((response) => response.json())
-            .then(students => {
-                setStudents(students);
+            .then(faveparks => {
+                setStudents(faveparks);
             })
     }
 

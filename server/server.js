@@ -1,8 +1,11 @@
 const express = require('express');
 const cors = require('cors');
+require("dotenv").config();
 const path = require('path');
-require('dotenv').config()
+require('dotenv').config(); //??
 const db = require('../server/db/db-connection.js'); 
+const fetch = require("node-fetch"); 
+const apiKey = `${process.env.API_KEY}`;
 const REACT_BUILD_DIR = path.join(__dirname, '..', 'client', 'build');
 const app = express();
 app.use(express.static(REACT_BUILD_DIR));
@@ -16,20 +19,51 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(REACT_BUILD_DIR, 'index.html'));
 });
 
-//create the get request
-app.get('/api/students', cors(), async (req, res) => {
-    
-    // const STUDENTS = [
 
-    //     { id: 1, firstName: 'Lisa', lastName: 'Lee' },
-    //     { id: 2, firstName: 'Eileen', lastName: 'Long' },
-    //     { id: 3, firstName: 'Fariba', lastName: 'Dako' },
-    //     { id: 4, firstName: 'Cristina', lastName: 'Rodriguez' },
-    //     { id: 5, firstName: 'Andrea', lastName: 'Trejo' },
-    // ];
-    // res.json(STUDENTS);
+
+//get request from API
+app.get("/api/parksInfo", cors(), async (req, res) => {
+    const url = `https://developer.nps.gov/api/v1/parks?api_key=${apiKey}`;
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log("This is the parks api data: ", data);
+        res.send(data);
+    } catch (err) {
+        console.error("Fetch error: ", err);
+    }
+})
+
+app.get("/api/campInfo", cors(), async (req, res) => {
+    const url = `https://developer.nps.gov/api/v1/campgrounds?api_key=${apiKey}`;
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log("This is the api camp data: ", data);
+        res.send(data);
+    } catch (err) {
+        console.error("Fetch error: ", err);
+    }
+})
+
+app.get("/api/webcam", cors(), async (req, res) => {
+    //is this where I should add park code to be used??? 
+    parkCodeName = req.query.parkCodeName;
+    const url = `https://developer.nps.gov/api/v1/webcams?parkCode=${parkCodeName}&api_key=${apiKey}`;
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log("This is the webcam data: ", data);
+        res.send(data);
+    } catch (err) {
+        console.error("Fetch error:", err);
+    }
+})
+
+//create the get request
+app.get('/api/faveparks', cors(), async (req, res) => {
     try{
-        const { rows: students } = await db.query('SELECT * FROM students');
+        const { rows: faveparks } = await db.query('SELECT * FROM faveparks');
         res.send(students);
     } catch (e){
         console.log(e);
