@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Form from "./form";
+import Form from "./Form";
 
 function FaveParks() {
 
@@ -23,22 +23,22 @@ function FaveParks() {
     }, []);
 
     // A function to handle the Delete funtionallity
-    // const onDelete = (park) => {
-    //     return fetch(`/api/favParks/${park.code}`, {
-    //         method: "DELETE"
-    //     }).then((response) =>{
-    //         //console.log(response);
-    //         if(response.ok){
-    //             loadParks();
-    //         }
-    //     })
-    // }
+    const onDelete = (park) => {
+        return fetch(`/api/favParks/${park.code}`, {
+            method: "DELETE"
+        }).then((response) =>{
+            //console.log(response);
+            if(response.ok){
+                loadParks();
+            }
+        })
+    }
 
     // A function to handle the Add a new Student funtionallity 
-    const addStudent = (newStudent) => {
+    const addPark = (newPark) => {
         //console.log(newStudent);
         //postStudent(newStudent);
-        setParks((parks) => [...parks, newStudent]);
+        setParks((parks) => [...parks, newPark]);
     }
 
     // A function to update the list of students when the user edit a student 
@@ -58,7 +58,7 @@ function FaveParks() {
         // This line is just to close the form! 
        // setEditingStudentId(null);
 
-    }
+    //}
 
     //A function to grab the student.id of the student that we want to edit
     // const onEdit = (park) =>{
@@ -69,22 +69,24 @@ function FaveParks() {
 
 
     return (
-        <div className="students">
-            <h2> List of Students </h2>
+        <div className="parks">
+            <h2> List of Parks </h2>
             <ul>
                 {parks.map((park) => {
-                    if(park.code === editingStudentId){
-                        return <Form initialStudent={park} saveStudent={updateStudent} />
-                    } else {
+                    // if(park.code === editingParkId){
+                    //     return <Form initialPark={park} savePark={updatePark} />
+                    // } else {
                         return (
-                        <li key={park.code}> {park.firstname} {student.lastname} 
-                        <button type="button" onClick={() =>{onDelete(student)}}>X</button> 
-                        <button type="button" onClick={() => {onEdit(student)}}>Edit</button></li>
+                        <li key={park.code}> {park.FullName} {park.description} 
+                        <button type="button" onClick={() =>{onDelete(park)}}>X</button> 
+                        {/* <button type="button" onClick={() => {onEdit(park)}}>Edit</button> */}
+                        </li>
                         );
-                    }}
+                    //}
+                    }
                     )}
             </ul>
-            <Form saveStudent={addStudent} />
+            <Form savePark={addPark} />
         </div>
     );
 }
