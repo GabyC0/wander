@@ -40,35 +40,12 @@ app.get("/api/parksInfo", cors(), async (req, res) => {
 
 });
 
-    // app.get("/parks", cors(), async (req, res) => { 
-    //     const url = `https://developer.nps.gov/api/v1/parks?api_key=${apiKey}`;
-    //     try {
-    //         const result = await axios.get(url); //axios returns promise, await is for the resolve in promise, then execute next commands
-    //         console.log("parks result:", result);
-    //         res.json(result.data);
-    //     } catch (err) {
-    //         console.error("Fetch error: ", err);
-    //     }
-    // })
 
-    // try {
-    //     const response = await fetch(url, {
-    //         credentials: 'include',
-    //         method: 'GET',
-    //         headers: {'Content-Type': 'application/json'}, 
-    //   });
-    //     console.log("response", response);
-    //     const data = await response.json();
-    //     console.log("This is the parks api data: ");
-    //     res.send(data);
-    // } catch (err) {
-    //     console.error("Fetch error: ", err);
-    // }
+app.get("/api/campInfo/:parkCode", cors(), async (req, res) => {
+    const parkCode = req.params.parkCode;
+    console.log("parkCode param", parkCode);
 
-
-
-app.get("/api/campInfo", cors(), async (req, res) => {
-    const url = `https://developer.nps.gov/api/v1/campgrounds?api_key=${apiKey}`;
+    const url = `https://developer.nps.gov/api/v1/campgrounds?parkCode=${parkCode}&api_key=${apiKey}`;
     // try {
     //     const response = await fetch(url);
     //     const data = await response.json();
@@ -82,6 +59,7 @@ app.get("/api/campInfo", cors(), async (req, res) => {
     .then(function (response) {
         // handle success
         console.log(response.data);
+        res.send(response.data);
     })
     .catch(function (error) {
         // handle error
@@ -101,10 +79,10 @@ app.post("/api/webcam-park", (req, res) => {
     //res.redirect("/api?webcam");
 })
 
-app.get("/api/webcam", cors(), async (req, res) => {
+app.get("/api/webcam/:parkCode", cors(), async (req, res) => {
     //is this where I should add park code to be used??? 
-    parkCodeName = req.body.parkCode;
-    const url = `https://developer.nps.gov/api/v1/webcams?parkCode=${parkCodeName}&api_key=${apiKey}`;
+    const parkCode = req.params.parkCode;
+    const url = `https://developer.nps.gov/api/v1/webcams?parkCode=${parkCode}&api_key=${apiKey}`;
     // try {
     //     const response = await fetch(url);
     //     const data = await response.json();
@@ -118,6 +96,7 @@ app.get("/api/webcam", cors(), async (req, res) => {
     .then(function (response) {
         // handle success
         console.log(response.data);
+        res.send(response.data);
 })
     .catch(function (error) {
         // handle error
