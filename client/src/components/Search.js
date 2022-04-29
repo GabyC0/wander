@@ -8,6 +8,7 @@ export const Search = () => {
         </div>
         <div className="drop-list">
             {/* list buttons below using map */}
+            {/* button per park */}
             <button></button>
         </div>
     </div>
