@@ -6,21 +6,46 @@ const path = require('path');
 require('dotenv').config(); //??
 const db = require('../server/db/db-connection.js'); 
 const fetch = require("node-fetch"); 
+const { auth } = require('express-openid-connect');
 const apiKey = `${process.env.API_KEY}`;
 const REACT_BUILD_DIR = path.join(__dirname, '..', 'client', 'build');
 const app = express();
-app.use(express.static(REACT_BUILD_DIR));
 
-const PORT = process.env.PORT || 5001;
+
+
+
+const config = {
+    authRequired: false,
+    auth0Logout: true,
+    secret: process.env.SECRET,
+    baseURL: process.env.BASEURL,
+    clientID: process.env.CLIENTID,
+    issuerBaseURL: process.env.ISSUERBASEURL
+  };
+
+
+const PORT = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json());
+app.use(auth(config));
 
 //creates an endpoint for the route /api
 app.get('/', (req, res) => {
+    // console.log(req.oidc.isAuthenticated());
     res.sendFile(path.join(REACT_BUILD_DIR, 'index.html'));
 });
+//route for user authentication
+app.get('/api/me', (req, res) => {
+    console.log(req.oidc.isAuthenticated());
+    if(req.oidc.isAuthenticated()){
+        console.log(req.oidc.user);
+        res.json(req.oidc.user);
+    } else {
+        res.status(401).json({error: "Error in the auth0"});
+    }
+});
 
-
+app.use(express.static(REACT_BUILD_DIR));
 
 //get request from API
 app.get("/api/parksInfo", cors(), async (req, res) => {

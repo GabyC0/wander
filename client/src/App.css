@@ -70,3 +70,7 @@ a {
 .logo {
   margin-left: 1rem;
 }
+
+.login a {
+  color: black;
+}

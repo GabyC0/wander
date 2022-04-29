@@ -6,6 +6,7 @@ import { Nav } from './components/Nav'
 import { ParkList } from './components/ParkList'
 import { IndivPark } from './components/IndivPark'
 import { About } from './components/About'
+import { Login } from './components/Login';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
       </Router>
       {/* <Nav/> */}
       Hello from Front!
+      <Login/>
       {/* <Home/>
       <FaveParks /> */}
     </div>
