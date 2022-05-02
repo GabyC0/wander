@@ -6,7 +6,8 @@ import { Nav } from './components/Nav'
 import { ParkList } from './components/ParkList'
 import { IndivPark } from './components/IndivPark'
 import { About } from './components/About'
-import { Login } from './components/Login';
+import { Login } from './components/Login'
+import { Search } from './components/Search'
 
 function App() {
   return (
@@ -30,13 +31,14 @@ function App() {
           <Route exact path='/my-list' element={<FaveParks/>}/>
           {/* need a :userId page to know what user list to pull */}
           <Route path='/about' element={<About/>}/>
+          {/* <Route path='/log-in' element={<Login/>}/> */}
+          <Route path='/search' element={<Search/>}/>
         </Routes>
       </Router>
       {/* <Nav/> */}
-      Hello from Front!
-      <Login/>
-      {/* <Home/>
-      <FaveParks /> */}
+      {/* Hello from Front! */}
+      {/* <Login/> */}
+
     </div>
   );
 }

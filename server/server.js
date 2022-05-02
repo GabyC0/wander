@@ -21,7 +21,7 @@ const config = {
     baseURL: process.env.BASEURL,
     clientID: process.env.CLIENTID,
     issuerBaseURL: process.env.ISSUERBASEURL
-  };
+};
 
 
 const PORT = process.env.PORT || 3001;
@@ -97,12 +97,12 @@ app.get("/api/campInfo/:parkCode", cors(), async (req, res) => {
 })
 
 //post request for park webcam the user is searching
-let parkCodeName;
-app.post("/api/webcam-park", (req, res) => {
-    parkCodeName = req.body.parkCode;
-    //change redirect??
-    //res.redirect("/api?webcam");
-})
+// let parkCodeName;
+// app.post("/api/webcam-park", (req, res) => {
+//     parkCodeName = req.body.parkCode;
+//     //change redirect??
+//     //res.redirect("/api?webcam");
+// })
 
 app.get("/api/webcam/:parkCode", cors(), async (req, res) => {
     //is this where I should add park code to be used??? 
@@ -132,16 +132,16 @@ app.get("/api/webcam/:parkCode", cors(), async (req, res) => {
 });
 })
 
-// //create the get request
-// app.get('/api/faveparks', cors(), async (req, res) => {
-//     try{
-//         const { rows: faveparks } = await db.query('SELECT * FROM faveparks');
-//         res.send(students);
-//     } catch (e){
-//         console.log(e);
-//         return res.status(400).json({e});
-//     }
-// });
+//create the get request
+app.get('/api/faveparks/:id', cors(), async (req, res) => {
+    try{
+        const { rows: faveparks } = await db.query('SELECT * FROM faveparks');
+        res.send(faveparks);
+    } catch (e){
+        console.log(e);
+        return res.status(400).json({e});
+    }
+});
 
 // //create the POST request
 // app.post('/api/students', cors(), async (req, res) => {
@@ -156,10 +156,10 @@ app.get("/api/webcam/:parkCode", cors(), async (req, res) => {
 // });
 
 // // delete request
-// app.delete('/api/students/:studentId', cors(), async (req, res) =>{
-//     const studentId = req.params.studentId;
+// app.delete('/api/faveparks/:parkId', cors(), async (req, res) =>{
+//     const parkId = req.params.parkId;
 //     //console.log(req.params);
-//     await db.query('DELETE FROM students WHERE id=$1', [studentId]);
+//     await db.query('DELETE FROM faveparks WHERE id=$1', [parkId]);
 //     res.status(200).end();
 
 // });

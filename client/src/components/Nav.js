@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { Login } from './Login'
 
-export const Nav = () => {
+export const Nav = (props) => {
   return (
     <div className="navigation">
         <div className="logo">
@@ -22,7 +23,8 @@ export const Nav = () => {
                     <Link to='/my-list'>My List</Link>
                 </li>
                 <li>
-                    <Link to='/log-in'>Log In</Link>
+                    <Login/>
+                    {/* <button className="login" onClick={<Login/>}>Login</button> */}
                 </li>
             </ul>
         </nav>
