@@ -11,9 +11,6 @@ const apiKey = `${process.env.API_KEY}`;
 const REACT_BUILD_DIR = path.join(__dirname, '..', 'client', 'build');
 const app = express();
 
-
-
-
 const config = {
     authRequired: false,
     auth0Logout: true,
