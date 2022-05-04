@@ -1,30 +1,80 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import {Link, Outlet } from 'react-router-dom'
-const apiKey = `${process.env.API_KEY}`;
+//const apiKey = `${process.env.API_KEY}`;
 
 export const Search = () => {
 
   const [parks, setParks] = useState([]);
+  const [foundParks, setFoundParks] = useState(parks);
+  const [parkName, setName] = useState('');
+
+
+  //const [value, setValue] = useState(null);
+
+  //to use in input to track each change the user types
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
-    fetch(`https://developer.nps.gov/api/v1/parks?api_key=${apiKey}`)
+    fetch("/api/parksInfo")
+    //`https://developer.nps.gov/api/v1/parks?api_key=${apiKey}`
     .then((response) => response.json())
     .then(parks => {
-      setParks(parks);
+      setParks(parks.data);
+      console.log("here are park names", parks);
+      console.log("park code ", parks.data);
     })
   }, []);
 
-  return (
-    <div className="drop-wrapper">
-        <div className="drop-header"></div>
-        <div className="drop-title">
-        </div>
-        <div className="drop-list">
-            {/* list buttons below using map */}
-            {/* button per park */}
+   console.log(query);
 
-        </div>
-    </div>
-  )
+   // eslint-disable-next-line array-callback-return
+  //  parks.filter(park => {
+  //   if(query === '') {
+  //     return park;
+  //   } else if (park.name.toLowerCase().includes(query.toLowerCase())) {
+  //     return park;
+  //   }
+  //  }).map((park, index) => {
+  //    <div className="box" key={index}>
+  //      <p>{park.name}</p>
+  //    </div>
+  //  })
+
+  const filter = (e) => {
+    const keyword = e.target.value;
+
+    if(keyword !== '') {
+      const results = parks.filter((park) => {
+        return park.name.toLowerCase().startsWith(keyword.toLowerCase());
+      });
+      setFoundParks(results);
+    } else {
+      setFoundParks(parks);
+    }
+    setName(keyword);
+  };
+
+  // const handleChange = (event) => {
+  //   setValue(event.target.value);
+  // };
+
+  return (
+    // <div className="drop-wrapper">
+          <div className="parkList">
+            <input type="search" value={parkName}placeholder="Enter Park Name" onChange={filter}/>
+            <div>
+          {foundParks && foundParks.length > 0 ? (foundParks.map((parks, index) => (
+          <li key={index}>
+            <span>Park Name: {parks.name}</span>
+            <span>Park description: {parks.description}</span>
+          </li>
+          ))
+  ) : (
+    <h1>No results found</h1>
+  )}
+      </div>
+      </div>
+        
+  );
 }

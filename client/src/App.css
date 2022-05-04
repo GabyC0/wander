@@ -74,3 +74,14 @@ a {
 .login a {
   color: black;
 }
+
+.parkList .singlePark a{
+  color: purple
+}
+
+.search {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

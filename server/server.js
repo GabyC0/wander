@@ -49,7 +49,7 @@ app.use(express.static(REACT_BUILD_DIR));
 
 //get request from API
 app.get("/api/parksInfo", cors(), async (req, res) => {
-    const url = `https://developer.nps.gov/api/v1/parks?api_key=${apiKey}`;
+    const url = `https://developer.nps.gov/api/v1/parks?limit=500&api_key=${apiKey}`;
     console.log("url", url);
     axios.get(url)
         .then(function (response) {
