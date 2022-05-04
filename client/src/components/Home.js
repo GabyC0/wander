@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 export const Home = () => {
   return (
@@ -13,8 +14,8 @@ export const Home = () => {
         <div>
             <h3>National Park Search Tool</h3>
         </div>
-        {/* will change this to search link? */}
-        <button>DISCOVER ALL</button>
+        {/* add this to nav as search icon */}
+        <Link className='homeBtn' to='/search'><button>DISCOVER ALL</button></Link>
     </div>
   )
 }
