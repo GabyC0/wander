@@ -32,17 +32,42 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(REACT_BUILD_DIR, 'index.html'));
 });
 //route for user authentication
-app.get('/api/me', (req, res) => {
+app.get('/api/me', async (req, res) => {
     console.log(req.oidc.isAuthenticated());
     if(req.oidc.isAuthenticated()){
-        console.log(req.oidc.user);
+        console.log(req.oidc.user.email);
+        const search = await db.query(
+            `SELECT * FROM users WHERE email='${req.oidc.user.email}'`
+        )
+        console.log('search results', search.rows[0]);
+        if(search.rows.length === 0) {
+            const userCreated = await db.query(
+                'INSERT INTO users(name,nickname, email) VALUES($1, $2, $3) RETURNING *', [req.oidc.user.name, req.oidc.user.nickname, req.oidc.user.email]
+            )
+            console.log('userCreated', userCreated.rows[0])
+        }
         res.json(req.oidc.user);
     } else {
         res.status(401).json({error: "Error in the auth0"});
     }
 });
 
+//SELECT email FROM users WHERE EXISTS 
+
 app.use(express.static(REACT_BUILD_DIR));
+
+//create the POST request
+//what route?? /api/me or / ??
+app.post('/api/log-in', cors(), async (req, res) => {
+    const newUser = { name: req.body.name, nickname: req.body.nickname,  }
+    console.log([newUser.name, newUser.nickname]);
+    const result = await db.query(
+        'INSERT INTO users(name, nickname, email) VALUES($1, $2, $3) RETURNING *',
+        [newUser.name, newUser.nickname]
+    );
+    console.log(result.rows[0]);
+    res.json(result.rows[0]);
+});
 
 //get request from API
 app.get("/api/parksInfo", cors(), async (req, res) => {
@@ -151,6 +176,9 @@ app.get('/api/faveparks/:id', cors(), async (req, res) => {
 //     console.log(result.rows[0]);
 //     res.json(result.rows[0]);
 // });
+
+
+
 
 // // delete request
 // app.delete('/api/faveparks/:parkId', cors(), async (req, res) =>{
