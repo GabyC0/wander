@@ -6,7 +6,7 @@ export const Nav = (props) => {
   return (
     <div className="navigation">
         <div className="logo">
-            <img src="wander-logo.png" alt="wander logo" style={{height:"70px"}}/>
+            <a href='/'><img src="wander-logo.png" alt="wander logo" style={{height:"70px"}}/></a>
         </div>
         <nav className="item">
             <ul className="nav-ul">
@@ -17,7 +17,7 @@ export const Nav = (props) => {
                     <Link to='/about'>About</Link>
                 </li>
                 <li>
-                    <Link to='/park-list'>Park List</Link>
+                    <Link to='/search'>Park List</Link>
                 </li>
                 <li>
                     <Link to='/my-list'>My List</Link>

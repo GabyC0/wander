@@ -28,9 +28,14 @@ export const Login = () => {
 
   return (
     <div>
-        <button className="login">
-            {!user ? (<li><a href="http://localhost:3001/login">Login</a></li>) : (<li>Hello, {user.given_name} <a href="http://localhost:3001/logout">Logout</a></li>)}
-        </button>
+        <div>
+            {/* <button className="login"> */}
+                {!user ? (<li><button className="login"><a href="http://localhost:3001/login">Login</a></button></li>) : (<li>Hello, {user.given_name} <button><a href="http://localhost:3001/logout">Logout</a></button></li>)}
+            {/* </button> */}
+        </div>
+        <div>
+            {!user}
+        </div>
     </div>
   )
 }
