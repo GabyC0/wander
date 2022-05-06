@@ -61,16 +61,16 @@ app.use(express.static(REACT_BUILD_DIR));
 
 //create the POST request
 //what route?? /api/me or / ??
-app.post('/api/log-in', cors(), async (req, res) => {
-    const newUser = { name: req.body.name, nickname: req.body.nickname,  }
-    console.log([newUser.name, newUser.nickname]);
-    const result = await db.query(
-        'INSERT INTO users(name, nickname, email) VALUES($1, $2, $3) RETURNING *',
-        [newUser.name, newUser.nickname]
-    );
-    console.log(result.rows[0]);
-    res.json(result.rows[0]);
-});
+// app.post('/api/log-in', cors(), async (req, res) => {
+//     const newUser = { name: req.body.name, nickname: req.body.nickname,  }
+//     console.log([newUser.name, newUser.nickname]);
+//     const result = await db.query(
+//         'INSERT INTO users(name, nickname, email) VALUES($1, $2, $3) RETURNING *',
+//         [newUser.name, newUser.nickname]
+//     );
+//     console.log(result.rows[0]);
+//     res.json(result.rows[0]);
+// });
 
 //get request from API
 app.get("/api/parksInfo", cors(), async (req, res) => {
@@ -158,10 +158,13 @@ app.get("/api/webcam/:parkCode", cors(), async (req, res) => {
 })
 
 //create the get request
-app.get('/api/faveparks/:id', cors(), async (req, res) => {
+const { requiresAuth } = require('express-openid-connect');
+
+app.get('/api/faveparks/:id', requiresAuth(), cors(), async (req, res) => {
     try{
-        const { rows: faveparks } = await db.query('SELECT * FROM faveparks');
-        res.send(faveparks);
+        const userId = reqparams.contactId;
+        const { rows: faveparks } = await db.query(`SELECT * FROM faveparks WHERE id=$1`, [userId]);
+        res.send(faveparks, );
     } catch (e){
         console.log(e);
         return res.status(400).json({e});

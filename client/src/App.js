@@ -26,13 +26,13 @@ function App() {
             />
           </Route>
 
-          <Route exact path='/park-list' element={<ParkList/>}/> 
-            <Route path="/park-list/:parkCode" element={<IndivPark/>}/>
+          <Route exact path='/search' element={<Search/>}/> 
+            <Route path="/search/:parkCode" element={<IndivPark/>}/>
           <Route exact path='/my-list' element={<FaveParks/>}/>
           {/* need a :userId page to know what user list to pull */}
           <Route path='/about' element={<About/>}/>
           {/* <Route path='/log-in' element={<Login/>}/> */}
-          <Route path='/search' element={<Search/>}/>
+          {/* <Route path='/search' element={<Search/>}/> */}
         </Routes>
       </Router>
       {/* <Nav/> */}
