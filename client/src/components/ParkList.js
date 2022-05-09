@@ -1,22 +1,24 @@
 import React from 'react'
+import { useState, useEffect } from 'react'
+import {Link, Outlet } from 'react-router-dom'
 
 export const ParkList = () => {
-  // const [parks, setParks] = useState([]);
+  const [parks, setParks] = useState([]);
 
-  // useEffect(() => {
-  //   fetch("/api/parksInfo")
-  //   //`https://developer.nps.gov/api/v1/parks?api_key=${apiKey}`
-  //   .then((response) => response.json())
-  //   .then(parks => {
-  //     setParks(parks.data);
-  //     console.log("here are park names", parks);
-  //     console.log("park code ", parks.data);
-  //   })
-  // }, []);
+  useEffect(() => {
+    fetch("/api/parksInfo")
+    //`https://developer.nps.gov/api/v1/parks?api_key=${apiKey}`
+    .then((response) => response.json())
+    .then(parks => {
+      setParks(parks.data);
+      console.log("here are park names", parks);
+      console.log("park code ", parks.data);
+    })
+  }, []);
 
   return (
     <div>
-      {/* <h1>Park List</h1>
+      {/* {/* <h1>Park List</h1> */}
           <div className="parkList">
           <div className="search">            
           </div>

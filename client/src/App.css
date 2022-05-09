@@ -2,7 +2,7 @@ body {
   background: url(trees2.png) no-repeat center center fixed;
   background-size: cover;
   height: 100%;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .home h2 {

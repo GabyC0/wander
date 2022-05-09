@@ -62,12 +62,15 @@ export const Search = () => {
   return (
     // <div className="drop-wrapper">
           <div className="parkList">
+            
             <input type="search" value={parkName}placeholder="Enter Park Name" onChange={filter}/>
+            <br/>
             <div>
           {foundParks && foundParks.length > 0 ? (foundParks.map((parks, index) => (
           <li key={index}>
-            <span>Park Name: {parks.name}</span>
-            <span>Park description: {parks.description}</span>
+            <span>{parks.name}</span> 
+            <br/>
+            {/* <span>Park description: {parks.description}</span> */}
           </li>
           ))
   ) : (
