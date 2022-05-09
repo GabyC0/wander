@@ -1,3 +1,61 @@
+body {
+  background: url(trees2.png) no-repeat center center fixed;
+  background-size: cover;
+  height: 100%;
+  overflow: hidden;
+}
+
+.home h2 {
+  text-align: left;
+  margin-left: 10%;
+  color: white;
+  font-family: 'Signika', sans-serif;
+  font-size: 3rem;
+}
+
+.topH2 {
+  margin-bottom: 0;
+}
+
+.bottomH2 {
+  margin-top: 0;
+}
+
+.home h3 {
+  text-align: left;
+  margin-left: 10%;
+  color: #F6F6E9;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 1.25rem;
+}
+
+.home {
+  margin-top: 15%;
+}
+
+.btnDiv {
+  position:sticky;
+  top: 50%;
+  left: 10%;
+  width: 120px;
+  padding-top: 2%;
+  cursor: pointer;
+}
+
+.btnDiv button {
+  background-color: #9F8643;
+  padding: .35rem;
+  border-radius: 8px;
+}
+
+.about {
+  color: white;
+  font-size: 1.5rem;
+  width: 75%;
+  margin: auto;
+}
+
+
 .App {
   text-align: center;
 }
@@ -37,6 +95,51 @@
   }
 }
 
-ul{
+
+.nav-ul{
   list-style: none;
+  display:flex;
+  margin: 25px;
+}
+
+.navigation {
+  background-color: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
+.item {
+  display: flex;
+}
+
+li {
+  margin: 0 1rem;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  font-weight: bolder;
+  color: white;
+}
+
+.logo {
+  margin-left: 1rem;
+}
+
+.login a {
+  color: black;
+}
+
+.parkList .singlePark a{
+  color: purple
+}
+
+.search {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
