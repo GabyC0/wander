@@ -7,6 +7,15 @@ function FaveParks() {
     //Original state in the parent component so the page will now when to render new students
     const [parks, setParks] = useState([]);
 
+    //State to hide/show on nav bar
+    // const [hide, setHide] = useState(false);
+
+    // const toggleHidden = () {
+    //     setState({
+    //         isHidden(false);
+    //     })
+    // }
+
     // New state to check if we are working on editing a student 
     //const [editingStudentId, setEditingStudentId] = useState(null);
 

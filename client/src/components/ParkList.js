@@ -18,12 +18,12 @@ export const ParkList = () => {
 
   return (
     <div>
-      {/* {/* <h1>Park List</h1> */}
+      <h1>Park List</h1>
           <div className="parkList">
           <div className="search">            
           </div>
             {parks.map(park =>
-                 <Link to={`/parks/${parks.data.parkCode}`}>
+              <Link to={`/parks/${parks.parkCode}`}>
                 <ul className='parkList'>
                     <li className="singlePark"
                     key={park.parkCode}> 
@@ -31,21 +31,20 @@ export const ParkList = () => {
                     </b> 
                     <br/> 
                     <br/> 
+                    move to indiv park:
                     {park.description}
-                    
                     <br/>
                     <br/>
-                    move to indiv park
+                    move to indiv park:
                     <a href={park.directionsUrl}>Directions</a>
                     <br/>
                     </li> 
                     <hr/>
                     </ul>
-                // </Link>
-                )}
-                </div>
-                        <Outlet/> */}
-
+              </Link>
+            )}
+          </div>
+        <Outlet/>
     </div>
   )
 }
