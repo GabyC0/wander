@@ -7,6 +7,7 @@ require('dotenv').config(); //??
 const db = require('../server/db/db-connection.js'); 
 const fetch = require("node-fetch"); 
 const { auth } = require('express-openid-connect');
+const { response } = require('express');
 const apiKey = `${process.env.API_KEY}`;
 const REACT_BUILD_DIR = path.join(__dirname, '..', 'client', 'build');
 const app = express();
@@ -55,26 +56,12 @@ app.get('/api/me', async (req, res) => {
     }
 });
 
-//SELECT email FROM users WHERE EXISTS 
 
 app.use(express.static(REACT_BUILD_DIR));
 
-//create the POST request
-//what route?? /api/me or / ??
-// app.post('/api/log-in', cors(), async (req, res) => {
-//     const newUser = { name: req.body.name, nickname: req.body.nickname,  }
-//     console.log([newUser.name, newUser.nickname]);
-//     const result = await db.query(
-//         'INSERT INTO users(name, nickname, email) VALUES($1, $2, $3) RETURNING *',
-//         [newUser.name, newUser.nickname]
-//     );
-//     console.log(result.rows[0]);
-//     res.json(result.rows[0]);
-// });
-
 //get request from API
 app.get("/api/parksInfo", cors(), async (req, res) => {
-    const url = `https://developer.nps.gov/api/v1/parks?limit=500&api_key=${apiKey}`;
+    const url = `https://developer.nps.gov/api/v1/parks?limit=5&api_key=${apiKey}`;
     console.log("url", url);
     axios.get(url)
         .then(function (response) {
@@ -90,20 +77,36 @@ app.get("/api/parksInfo", cors(), async (req, res) => {
 
 });
 
+app.get('/api/parksInfo/:parkCode', cors(), async (req, res) => {
+    const parkCode = req.params.parkCode;
+
+    //how to get parkCode from api data coming in and use it here
+    const getParkCode = response.data.parkCode;
+    console.log('parkCode and getParkCode ', parkCode, getParkCode); 
+
+    const url = `https://developer.nps.gov/api/v1/campgrounds?parkCode=${parkCode}&api_key=${apiKey}`;
+
+    axios.get(url)
+    .then(function (response) {
+        // handle success
+        console.log(response.data);
+        res.send(response.data);
+    })
+    .catch(function (error) {
+        // handle error
+        console.log(error);
+    })
+    .then(function () {
+        // always executed
+    });
+})
+
 
 app.get("/api/campInfo/:parkCode", cors(), async (req, res) => {
     const parkCode = req.params.parkCode;
     console.log("parkCode param", parkCode);
 
     const url = `https://developer.nps.gov/api/v1/campgrounds?parkCode=${parkCode}&api_key=${apiKey}`;
-    // try {
-    //     const response = await fetch(url);
-    //     const data = await response.json();
-    //     console.log("This is the api camp data: ", data);
-    //     res.send(data);
-    // } catch (err) {
-    //     console.error("Fetch error: ", err);
-    // }
 
     axios.get(url)
     .then(function (response) {
@@ -129,6 +132,8 @@ app.get("/api/campInfo/:parkCode", cors(), async (req, res) => {
 //     //res.redirect("/api?webcam");
 // })
 
+
+//get request for webcam
 app.get("/api/webcam/:parkCode", cors(), async (req, res) => {
     //is this where I should add park code to be used??? 
     const parkCode = req.params.parkCode;
@@ -158,17 +163,23 @@ app.get("/api/webcam/:parkCode", cors(), async (req, res) => {
 })
 
 //create the get request
-const { requiresAuth } = require('express-openid-connect');
+// const { requiresAuth } = require('express-openid-connect');
 
-app.get('/api/faveparks/:id', requiresAuth(), cors(), async (req, res) => {
-    try{
-        const userId = reqparams.contactId;
-        const { rows: faveparks } = await db.query(`SELECT * FROM faveparks WHERE id=$1`, [userId]);
-        res.send(faveparks, );
-    } catch (e){
-        console.log(e);
-        return res.status(400).json({e});
-    }
+app.get('/api/user/:userId', cors(), async (req, res) => {
+    const userId = req.params.userId;
+    
+    const getId = await db.query(`SELECT * FROM faveparks WHERE id=${userId}`);
+    console.log("getId", getId.rows);
+    res.send(getId.rows);
+
+    // try{
+    //     const userId = reqparams.contactId;
+    //     const { rows: faveparks } = await db.query(`SELECT * FROM faveparks WHERE id=$1`, [userId]);
+    //     res.send(faveparks, );
+    // } catch (e){
+    //     console.log(e);
+    //     return res.status(400).json({e});
+    // }
 });
 
 // //create the POST request

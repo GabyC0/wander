@@ -23,21 +23,21 @@ export const ParkList = () => {
           <div className="search">            
           </div>
             {parks.map(park =>
-              <Link to={`/parks/${parks.parkCode}`}>
+              <Link to={`/park-list/${park.parkCode}`}>
                 <ul className='parkList'>
                     <li className="singlePark"
                     key={park.parkCode}> 
-                    <b>{park.name} {park.states}
+                    <b>{park.name} {park.parkCode} {park.states}
                     </b> 
                     <br/> 
                     <br/> 
-                    move to indiv park:
+                    {/* move to indiv park:
                     {park.description}
                     <br/>
                     <br/>
                     move to indiv park:
                     <a href={park.directionsUrl}>Directions</a>
-                    <br/>
+                    <br/> */}
                     </li> 
                     <hr/>
                     </ul>

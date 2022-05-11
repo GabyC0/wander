@@ -28,7 +28,7 @@ function FaveParks() {
     // }
 
     useEffect(() => {
-        fetch(`http://localhost:3001/api/faveparks`)
+        fetch(`http://localhost:3001/api/user/${params.userId}`)
             .then((response)=> response.json())
             .then(parks => {
                 setParks(parks);
