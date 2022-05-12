@@ -59,7 +59,7 @@ app.get('/api/me', async (req, res) => {
 
 app.use(express.static(REACT_BUILD_DIR));
 
-//get request from API
+//get parks list from the nps API
 app.get("/api/parksInfo", cors(), async (req, res) => {
     const url = `https://developer.nps.gov/api/v1/parks?limit=5&api_key=${apiKey}`;
     console.log("url", url);
@@ -77,19 +77,21 @@ app.get("/api/parksInfo", cors(), async (req, res) => {
 
 });
 
+//get specific single park information 
 app.get('/api/parksInfo/:parkCode', cors(), async (req, res) => {
     const parkCode = req.params.parkCode;
 
     //how to get parkCode from api data coming in and use it here
-    const getParkCode = response.data.parkCode;
-    console.log('parkCode and getParkCode ', parkCode, getParkCode); 
+    //const getParkCode = response.data.parkCode;
+    //console.log('parkCode and getParkCode ', parkCode, getParkCode); 
 
-    const url = `https://developer.nps.gov/api/v1/campgrounds?parkCode=${parkCode}&api_key=${apiKey}`;
+    const url = `https://developer.nps.gov/api/v1/parks?parkCode=${parkCode}&api_key=${apiKey}`;
 
     axios.get(url)
     .then(function (response) {
         // handle success
-        console.log(response.data);
+        console.log('parkCode back', response.data);
+        //if single item respond with single park if not an error
         res.send(response.data);
     })
     .catch(function (error) {

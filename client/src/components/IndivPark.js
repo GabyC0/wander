@@ -6,34 +6,42 @@ export const IndivPark = () => {
   let params = useParams();
 
   console.log('params', params);
-  const [parks, setParks] = useState([]);
+  const [park, setPark] = useState([]);
 
   useEffect(() => {
-    fetch(`/api/parksInfo`)
+    fetch(`/api/parksInfo/${params.parkCode}`)
     .then((response) => response.json())
-    .then(parks => {
-      //console.log('parks in front', parks.data[0]);
-      setParks(parks.data[0]);
+    .then(park => {
+      
+      setPark(park.data[0]);
+      console.log('parks in front', park.data);
+      //or park.data
+      //setParks(parks);
     })
   }, []);
 
   return (
     <div>
       <h2>
-      {params.parkCode}
-      <b>{parks.name} {parks.states}
-                    </b> 
+      {park.fullName}
+      </h2>
+      {/* <div key={park.parkCode}>
+        {params.name}
+      </div>
+      <b>{park.fullName}  */}
+      
+                    {/* </b>  */}
                     <br/> 
                     <br/> 
                     move to indiv park:
-                    {parks.description}
+                    {park.description}
                     <br/>
                     <br/>
                     move to indiv park:
-                    <a href={parks.directionsUrl}>Directions</a>
+                    {/* <a href={park.directionsUrl}>Directions</a> */}
                     <br/>
 
-      </h2>
+      
         {/* {parks.map(park =>
           <ul className='parkList'>
                     <li className="singlePark"
