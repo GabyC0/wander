@@ -21,46 +21,21 @@ export const IndivPark = () => {
   }, []);
 
   return (
-    <div>
+    <div className="indivPark">
+      <div>
       <h2>
+      <br/>
       {park.fullName}
       </h2>
-      {/* <div key={park.parkCode}>
-        {params.name}
       </div>
-      <b>{park.fullName}  */}
-      
-                    {/* </b>  */}
-                    <br/> 
-                    <br/> 
-                    move to indiv park:
-                    {park.description}
-                    <br/>
-                    <br/>
-                    move to indiv park:
-                    {/* <a href={park.directionsUrl}>Directions</a> */}
-                    <br/>
-
-      
-        {/* {parks.map(park =>
-          <ul className='parkList'>
-                    <li className="singlePark"
-                    key={park.parkCode}> 
-                    <b>{params.name} {park.states}
-                    </b> 
-                    <br/> 
-                    <br/> 
-                    move to indiv park:
-                    {park.description}
-                    <br/>
-                    <br/>
-                    move to indiv park:
-                    <a href={park.directionsUrl}>Directions</a>
-                    <br/>
-                    </li> 
-                    <hr/>
-                    </ul>
-            )} */}
+        <div className="indivDesc"> 
+            {park.description}
+            <br/>
+            <br/>
+            <a href={park.directionsUrl}>Directions</a>
+            <br/>
+            *Add campsite link here*
+        </div>
     </div>
   )
 }

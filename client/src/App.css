@@ -2,7 +2,7 @@ body {
   background: url(trees2.png) no-repeat center center fixed;
   background-size: cover;
   height: 100%;
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 
 .home h2 {
@@ -63,6 +63,39 @@ body {
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+.parkList {
+  /* background: rgba( 255, 255, 255, 0.45 ); */
+  /* box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 ); */
+  backdrop-filter: blur( 4px );
+  -webkit-backdrop-filter: blur( 4px );
+  width: 70%;
+  margin: auto;
+  /* border-radius: 10px; */
+  /* border: 1px solid rgba( 255, 255, 255, 0.18 ); */
+  /* padding: 10px; */
+  /* margin: 10px auto; */
+  /* font-family: 'Grape Nuts', cursive; */
+  /* font-family: 'Architects Daughter', cursive; */
+  /* font-size: large; */
+  /* padding: 0 15px 15px; */
+}
+
+.listH2 {
+  color: white;
+}
+
+.indivPark {
+  backdrop-filter: blur( 65px );
+  -webkit-backdrop-filter: blur( 8px );
+  width: 70%;
+  margin: auto;
+  padding: 0 15px 15px;
+}
+
+.indivPark h2{
+  color: white;
 }
 
 @media (prefers-reduced-motion: no-preference) {

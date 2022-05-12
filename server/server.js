@@ -167,12 +167,20 @@ app.get("/api/webcam/:parkCode", cors(), async (req, res) => {
 //create the get request
 // const { requiresAuth } = require('express-openid-connect');
 
-app.get('/api/user/:userId', cors(), async (req, res) => {
-    const userId = req.params.userId;
+app.get('/api/userFave', cors(), async (req, res) => {
+    if(req.oidc.isAuthenticated()) {
+        const authUser = await db.query(`SELECT * FROM users WHERE email='${req.oidc.user.email}'`);
+        console.log('authUser result', authUser.rows[0]);
+        const userList = await db.query('SELECT * FROM faveparks  WHERE userid = $1', [authUser.rows[0].id]);
+        console.log('favpark list', userList.rows);
+
+        return res.json(userList.rows);
+    }
+    // const userId = req.params.userId;
     
-    const getId = await db.query(`SELECT * FROM faveparks WHERE id=${userId}`);
-    console.log("getId", getId.rows);
-    res.send(getId.rows);
+    // const getId = await db.query(`SELECT * FROM faveparks WHERE id=${userId}`);
+    // console.log("getId", getId.rows);
+    // res.send(getId.rows);
 
     // try{
     //     const userId = reqparams.contactId;

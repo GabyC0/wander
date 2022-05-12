@@ -28,7 +28,7 @@ function App() {
 
           <Route exact path='/park-list' element={<ParkList/>}/> 
             <Route path="/park-list/:parkCode" element={<IndivPark/>}/>
-          <Route exact path='/my-list' element={<FaveParks/>}/>
+          <Route path='/my-list' element={<FaveParks/>}/>
           {/* need a :userId page to know what user list to pull */}
           <Route path='/about' element={<About/>}/>
           {/* <Route path='/log-in' element={<Login/>}/> */}
