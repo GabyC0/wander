@@ -67,11 +67,13 @@ export const Search = () => {
             <br/>
             <div>
           {foundParks && foundParks.length > 0 ? (foundParks.map((parks, index) => (
+          <Link to={`/park-list/${parks.parkCode}`}>
           <li key={index}>
             <span>{parks.name}</span> 
             <br/>
             {/* <span>Park description: {parks.description}</span> */}
           </li>
+          </Link>
           ))
   ) : (
     <h1>No results found</h1>

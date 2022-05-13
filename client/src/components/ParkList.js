@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import {Link, Outlet } from 'react-router-dom'
+import {Search} from './Search'
 
 export const ParkList = () => {
   const [parks, setParks] = useState([]);
@@ -18,6 +19,7 @@ export const ParkList = () => {
 
   return (
     <div className="parkList">
+      <Search/>
       <h1 className="listH2">Park List</h1>
           <div >
           {/* <div className="search">            

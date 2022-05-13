@@ -32,7 +32,7 @@ function App() {
           {/* need a :userId page to know what user list to pull */}
           <Route path='/about' element={<About/>}/>
           {/* <Route path='/log-in' element={<Login/>}/> */}
-          {/* <Route path='/search' element={<Search/>}/> */}
+          <Route path='/search' element={<Search/>}/>
         </Routes>
       </Router>
       {/* <Nav/> */}

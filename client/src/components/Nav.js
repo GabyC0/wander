@@ -49,11 +49,11 @@ export const Nav = (props) => {
                 <li>
                     <Link to='/park-list'>Park List</Link>
                 </li>
-                {!user ? (<li></li>) : (
+                {user &&
                 <li className="hiddenList">
                     <Link to='/my-list'>My List</Link>
                 </li>
-                )}
+                }
                 <li>
                     <Login />
                     {/* <button className="login" onClick={<Login/>}>Login</button> */}

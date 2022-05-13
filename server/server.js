@@ -26,6 +26,7 @@ const config = {
 
 
 const PORT = process.env.PORT || 3001;
+console.log('port', PORT);
 app.use(cors());
 app.use(express.json());
 app.use(auth(config));
@@ -192,29 +193,43 @@ app.get('/api/userFave', cors(), async (req, res) => {
     // }
 });
 
-// //create the POST request
-// app.post('/api/students', cors(), async (req, res) => {
-//     const newUser = { firstname: req.body.firstname, lastname: req.body.lastname }
-//     console.log([newUser.firstname, newUser.lastname]);
-//     const result = await db.query(
-//         'INSERT INTO students(firstname, lastname) VALUES($1, $2) RETURNING *',
-//         [newUser.firstname, newUser.lastname]
-//     );
-//     console.log(result.rows[0]);
-//     res.json(result.rows[0]);
-// });
+//create the POST request
+app.post('/api/students', cors(), async (req, res) => {
+    const newUser = { firstname: req.body.firstname, lastname: req.body.lastname }
+    console.log([newUser.firstname, newUser.lastname]);
+    const result = await db.query(
+        'INSERT INTO students(firstname, lastname) VALUES($1, $2) RETURNING *',
+        [newUser.firstname, newUser.lastname]
+    );
+    console.log(result.rows[0]);
+    res.json(result.rows[0]);
+});
 
 
 
 
 // // delete request
-// app.delete('/api/faveparks/:parkId', cors(), async (req, res) =>{
-//     const parkId = req.params.parkId;
-//     //console.log(req.params);
-//     await db.query('DELETE FROM faveparks WHERE id=$1', [parkId]);
-//     res.status(200).end();
+app.delete('/api/userFave/:parkId', cors(), async (req, res) =>{
+    const parkId = req.params.parkId;
+    //console.log(req.params);
+    await db.query(`DELETE FROM faveparks WHERE id=$1`, [parkId]);
+    res.status(200).end();
 
-// });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // // Put request - Update request
 // app.put('/api/students/:studentId', cors(), async (req, res) =>{
