@@ -4,8 +4,8 @@ const axios = require('axios').default;
 require("dotenv").config();
 const path = require('path');
 require('dotenv').config(); //??
-const db = require('../server/db/db-connection.js'); 
-const fetch = require("node-fetch"); 
+const db = require('../server/db/db-connection.js');
+const fetch = require("node-fetch");
 const { auth } = require('express-openid-connect');
 const apiKey = `${process.env.API_KEY}`;
 const REACT_BUILD_DIR = path.join(__dirname, '..', 'client', 'build');
@@ -14,26 +14,28 @@ const app = express();
 const config = {
     authRequired: false,
     auth0Logout: true,
-    secret: process.env.SECRET,
-    baseURL: process.env.BASEURL,
+    baseURL: 'http://localhost:5001', // TODO: put this in your `.env` file
     clientID: process.env.CLIENTID,
-    issuerBaseURL: process.env.ISSUERBASEURL
+    issuerBaseURL: process.env.ISSUERBASEURL,
+    secret: process.env.SECRET,
 };
 
-
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 5001;
 app.use(cors());
 app.use(express.json());
+// app.use(express.static(REACT_BUILD_DIR));
 app.use(auth(config));
+
 
 //creates an endpoint for the route /api
 app.get('/', (req, res) => {
     // console.log(req.oidc.isAuthenticated());
-    res.sendFile(path.join(REACT_BUILD_DIR, 'index.html'));
+    // res.sendFile(path.join(REACT_BUILD_DIR, 'index.html'));
+    res.redirect('http://localhost:3000');
 });
 //route for user authentication
 app.get('/api/me', async (req, res) => {
-    console.log(req.oidc.isAuthenticated());
+    console.log('Auth0 isAuthenticated', req.oidc.isAuthenticated());
     if(req.oidc.isAuthenticated()){
         console.log(req.oidc.user.email);
         const search = await db.query(
@@ -52,9 +54,8 @@ app.get('/api/me', async (req, res) => {
     }
 });
 
-//SELECT email FROM users WHERE EXISTS 
+//SELECT email FROM users WHERE EXISTS
 
-app.use(express.static(REACT_BUILD_DIR));
 
 //create the POST request
 //what route?? /api/me or / ??
@@ -127,7 +128,7 @@ app.get("/api/campInfo/:parkCode", cors(), async (req, res) => {
 // })
 
 app.get("/api/webcam/:parkCode", cors(), async (req, res) => {
-    //is this where I should add park code to be used??? 
+    //is this where I should add park code to be used???
     const parkCode = req.params.parkCode;
     const url = `https://developer.nps.gov/api/v1/webcams?parkCode=${parkCode}&api_key=${apiKey}`;
     // try {
