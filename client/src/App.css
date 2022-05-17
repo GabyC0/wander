@@ -2,7 +2,7 @@ body {
   background: url(trees2.png) no-repeat center center fixed;
   background-size: cover;
   height: 100%;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .home h2 {
@@ -65,13 +65,14 @@ body {
   pointer-events: none;
 }
 
-.parkList {
+/* .parkList { */
   /* background: rgba( 255, 255, 255, 0.45 ); */
   /* box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 ); */
-  backdrop-filter: blur( 4px );
-  -webkit-backdrop-filter: blur( 4px );
-  width: 70%;
-  margin: auto;
+  /* backdrop-filter: blur( 4px ); */
+  /* -webkit-backdrop-filter: blur( 4px ); */
+  /* width: 70%;
+  margin: auto; */
+  
   /* border-radius: 10px; */
   /* border: 1px solid rgba( 255, 255, 255, 0.18 ); */
   /* padding: 10px; */
@@ -80,22 +81,141 @@ body {
   /* font-family: 'Architects Daughter', cursive; */
   /* font-size: large; */
   /* padding: 0 15px 15px; */
+/* } */
+
+.plBack {
+  margin-top: 5rem;
+  padding-top: 2rem;
 }
 
-.listH2 {
+.parkItems h3 {
+  color: white;
+  font-size: 1.75rem;
+  margin-bottom: 5rem;
+}
+
+.parkList {
+  background-color: #5A767B;
+  opacity: .85;
+  width: 70%;
+  margin: auto;
+  border-radius: 20px;
+}
+
+.parkList h2 {
+  font-family: 'Signika', sans-serif;
+  font-size: 2.5rem;
   color: white;
 }
 
+.parkList input {
+  width: 50%;
+  font-size: 1.5rem;
+  border-radius: 5px;
+}
+
+/* .parkListBack {
+  background-color: #5A767B;
+  padding: 5%;
+  border-radius: 25px;
+  opacity: .90;
+} */
+
+.listH2 {
+  color: #F6F6E9;
+  font-size: 2.75rem;
+  font-family: 'Signika', sans-serif;
+}
+
+.listText {
+  font-size: 1.25rem;
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+
 .indivPark {
-  backdrop-filter: blur( 65px );
-  -webkit-backdrop-filter: blur( 8px );
-  width: 70%;
+  /* backdrop-filter: blur( 65px );
+  -webkit-backdrop-filter: blur( 8px ); */
+  width: 60%;
   margin: auto;
   padding: 0 15px 15px;
+  background-color: #5A767B;
+  padding: 2%;
+  border-radius: 25px;
+  margin-top: 3%;
+  opacity: .85;
+  font-size: 1.5rem;
+  color: #F6F6E9;
+}
+
+.singlePark h4{
+  font-size: 2rem;
 }
 
 .indivPark h2{
   color: white;
+}
+
+.indivDesc button {
+  margin: 5px;
+  margin-bottom: 20px;
+  background-color: #9F8643;
+  color: white;
+  border-radius: 15px;
+  width: 15%;
+  height: 35px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.aboutText {
+  background-color: #5A767B;
+  padding: 5%;
+  border-radius: 25px;
+  font-size: 1.75rem;
+}
+
+.about {
+  padding: 6%;
+  opacity: .90;
+}
+
+.parks {
+  background-color: #5A767B;
+  padding: 2%;
+  border-radius: 25px;
+  font-size: 1.25rem;
+  width: 60%;
+  margin: auto;
+  margin-top: 4rem;
+  opacity: .80;
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.parks li {
+  padding-top: 1rem;;
+}
+
+.delBtn {
+  /* width: 25px;
+  height: 25px; */
+  /* background: url(delete.png) no-repeat center center;
+  background-size: cover;
+  border:none; */
+  margin: 5px;
+  background-color: #9F8643;
+  color: white;
+  border-radius: 15px;
+  width: 10%;
+  height: 30px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.parks h2 {
+  color: white;
+  font-family: 'Signika', sans-serif;
 }
 
 @media (prefers-reduced-motion: no-preference) {

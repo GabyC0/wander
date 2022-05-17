@@ -62,7 +62,7 @@ app.use(express.static(REACT_BUILD_DIR));
 
 //get parks list from the nps API
 app.get("/api/parksInfo", cors(), async (req, res) => {
-    const url = `https://developer.nps.gov/api/v1/parks?limit=5&api_key=${apiKey}`;
+    const url = `https://developer.nps.gov/api/v1/parks?limit=500&api_key=${apiKey}`;
     console.log("url", url);
     axios.get(url)
         .then(function (response) {
@@ -177,32 +177,23 @@ app.get('/api/userFave', cors(), async (req, res) => {
 
         return res.json(userList.rows);
     }
-    // const userId = req.params.userId;
-    
-    // const getId = await db.query(`SELECT * FROM faveparks WHERE id=${userId}`);
-    // console.log("getId", getId.rows);
-    // res.send(getId.rows);
-
-    // try{
-    //     const userId = reqparams.contactId;
-    //     const { rows: faveparks } = await db.query(`SELECT * FROM faveparks WHERE id=$1`, [userId]);
-    //     res.send(faveparks, );
-    // } catch (e){
-    //     console.log(e);
-    //     return res.status(400).json({e});
-    // }
 });
 
 //create the POST request
-app.post('/api/students', cors(), async (req, res) => {
-    const newUser = { firstname: req.body.firstname, lastname: req.body.lastname }
-    console.log([newUser.firstname, newUser.lastname]);
+app.post('/api/parkFave/:parkCode/:fullName', cors(), async (req, res) => {
+
+    const parkCode = req.params.parkCode;
+    const parkName = req.params.fullName;
+
+    const authUser = await db.query(`SELECT * FROM users WHERE email='${req.oidc.user.email}'`);
+    console.log('parkCode for POST', parkCode);
     const result = await db.query(
-        'INSERT INTO students(firstname, lastname) VALUES($1, $2) RETURNING *',
-        [newUser.firstname, newUser.lastname]
+        'INSERT INTO faveparks(userid, parkcode, parkname) VALUES($1, $2, $3) RETURNING *',
+        [authUser.rows[0].id, parkCode, parkName]
     );
     console.log(result.rows[0]);
     res.json(result.rows[0]);
+
 });
 
 
@@ -210,6 +201,7 @@ app.post('/api/students', cors(), async (req, res) => {
 
 // // delete request
 app.delete('/api/userFave/:parkId', cors(), async (req, res) =>{
+
     const parkId = req.params.parkId;
     //console.log(req.params);
     await db.query(`DELETE FROM faveparks WHERE id=$1`, [parkId]);

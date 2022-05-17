@@ -4,13 +4,13 @@ import { Login } from './Login'
 import { useState, useEffect } from 'react';
 
 
-export const Nav = (props) => {
+export const Nav = () => {
         //State to hide/show on nav bar
-        const [hide, setHide] = useState(undefined);
+        // const [hide, setHide] = useState(undefined);
 
-        const login = () => {
-            setHide(false);
-        }
+        // const login = () => {
+        //     setHide(false);
+        // }
 
 
     const [user, setUser] = useState(undefined);

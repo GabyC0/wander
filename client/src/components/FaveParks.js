@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import {Link, Outlet } from 'react-router-dom'
 
 
-function FaveParks() {
+function FaveParks(props) {
 
-    //Original state in the parent component so the page will now when to render new students
+    //Original state in the parent component so the page will know when to render deleted parks
     const [parks, setParks] = useState([]);
 
     const loadParks = () => {
@@ -64,19 +64,18 @@ function FaveParks() {
             <h2> Favorite Parks List </h2>
             {/* <h3>HERE: {parks.id} </h3> */}
             <div>
+                <h3>{props.fullName}</h3>
+            <ul>
                 {parks.map(park => 
-                    
-                        <ul>
                             <li key={park.id}>
                             <Link to={`/park-list/${park.parkcode}`}>
                             {/* {park.parkcode} */}
-                            *{park.parkname}
+                            {park.parkname}
                             </Link>
-                            <button type="button" onClick={() => {onDelete(park)}}>-</button>
+                            <button className="delBtn" type="button" onClick={() => {onDelete(park)}}>REMOVE</button>
                             </li>
-                        </ul>
-                    
                     )}
+                    </ul>
             </div>
             {/* <Outlet/> */}
             {/* {JSON.stringify(parks)} */}

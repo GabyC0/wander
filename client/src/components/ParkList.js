@@ -20,26 +20,27 @@ export const ParkList = () => {
   return (
     <div className="parkList">
       <Search/>
-      <h1 className="listH2">Park List</h1>
-          <div >
-          {/* <div className="search">            
-          </div> */}
-          {/* Add a filter by state */}
+      <div className="parkListBack">
+      <h1 className="listH2">PARK LIST</h1>
+          <div className="listText">
             {parks.map(park =>
               <Link to={`/park-list/${park.parkCode}`}>
                 <ul className='parkList'>
                     <li className="singlePark"
                     key={park.parkCode}> 
-                    <b>{park.name} </b>
-                    <br/>
-                    Park Code: {park.parkCode}   State: {park.states}
+                    <h4><b>{park.fullName}</b></h4>
+                    {/* <br/>
+                    <br/> */}
                     </li> 
+                    <span>Park Code: {park.parkCode}</span>  <span>State: {park.states}</span>
+                    
                     <hr/>
                     </ul>
               </Link>
             )}
           </div>
         <Outlet/>
+        </div>
     </div>
   )
 }
