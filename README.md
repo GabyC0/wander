@@ -1,5 +1,5 @@
 <div align="center">
-  <img height="100" src="https://res.cloudinary.com/gabyc/image/upload/v1652738521/wander-logo_uwvdkr.png">
+  <img height="100" src="https://user-images.githubusercontent.com/74997368/169147761-a801efe1-1fad-4f89-a274-243c2dae05c3.png">
 </div>
 
 
