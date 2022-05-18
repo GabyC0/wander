@@ -90,7 +90,7 @@ For people who:
       <br>Auth0
     </td>
     <td align="center" width="96">
-      <br>GoogleMaps
+      <br>GoogleMaps (stretch goal)
     </td>
   </tr>
 </table>
