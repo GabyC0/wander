@@ -89,10 +89,28 @@ WANDER is an application that helps users take the first step towards their WAND
   </tr>
 </table>
 
-## Installation
 
+## Drawing Board
 
-## Wireframes
+### Style Guide
+<div align="center">
+<img src="https://user-images.githubusercontent.com/74997368/169140404-712f5bac-7289-4b9a-84e0-11f9c1ef9dc4.png" width="500" alt="style-guide" />
+</div>
+
+### Wireframe
+<div align="center">
+<img src="https://user-images.githubusercontent.com/74997368/169140618-86d8d67d-408f-4ba9-bef2-8c5d28c1f10a.png" width="500" alt="wireframe" />
+</div>
+
+### Data Model
+<div align="center">
+<img src="https://user-images.githubusercontent.com/74997368/169140673-04ce8ec2-48f3-473a-a9f4-0da113e57c59.png" width="500" alt="data-model" />
+</div>
+
+### User Flow
+<div align="center">
+<img src="https://user-images.githubusercontent.com/74997368/169140784-4da93438-3afe-487b-97b4-39af1ed07b26.png" width="600" alt="user-flow" />
+</div>
 
 
 ## Difficulties/Unsolved Problems
