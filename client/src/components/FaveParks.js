@@ -1,100 +1,84 @@
 import { useState, useEffect } from "react";
-import Form from "./Form";
-import { useParams } from 'react-router-dom';
+import {Link, Outlet } from 'react-router-dom'
 
-function FaveParks() {
 
-    //Original state in the parent component so the page will now when to render new students
+function FaveParks(props) {
+
+    //Original state in the parent component so the page will know when to render deleted parks
     const [parks, setParks] = useState([]);
 
-    // New state to check if we are working on editing a student 
-    //const [editingStudentId, setEditingStudentId] = useState(null);
-
-    // const loadParks = () => {
-    //     fetch("/api/faveparks")
-    //         .then((response) => response.json())
-    //         .then(parks => {
-    //             setParks(parks);
-    //         })
-    // }
-
-    useEffect(() => {
-        fetch(`http://localhost:3001/api/faveparks`)
-            .then((response)=> response.json())
+    const loadParks = () => {
+        fetch("/api/userFave")
+            .then((response) => response.json())
             .then(parks => {
                 setParks(parks);
+                console.log("park list for user - front", parks);
             })
+    }
+
+    //Use effect hook will render the parks in the app. This will change any time that our intial state changes
+
+    useEffect(() => {
+        loadParks();
+        // fetch('/api/userFave')
+        //     .then((response)=> response.json())
+        //     .then(parks => {
+        //         setParks(parks);
+        //         console.log("park list for user - front", parks);
+        //     })
     }, []);
 
-    // Use effect hook to render the parks in the app. This will change any time that our initial state change
-    let params = useParams();
 
     // A function to handle the Delete funtionallity
-    // const onDelete = (park) => {
-    //     return fetch(`/api/favParks/${park.code}`, {
-    //         method: "DELETE"
-    //     }).then((response) =>{
-    //         //console.log(response);
-    //         if(response.ok){
-    //             loadParks();
-    //         }
-    //     })
-    // }
+    const onDelete = async (park) => {
+        return fetch(`/api/userFave/${park.id}`, {
+            method: "DELETE"
+        }).then((response) => {
+            if(response.ok) {
+                loadParks();
+            }
+        })
+    }
 
-    // A function to handle the Add a new Student funtionallity 
+
+        //something to do with the params, need useParams?
+        // const response = await fetch(`/api/userFave/${park.parkcode}`, {
+        //     method: "DELETE"
+        // });
+        // console.log(response);
+        //loadParks();
+
+    //}
+
+    // A function to handle the Add a new fave park functionality 
     //const addPark = (newPark) => {
-        //console.log(newStudent);
-        //postStudent(newStudent);
+        //console.log(newPark);
+        //postStudent(newPark);
         //setParks((parks) => [...parks, newPark]);
     //}
 
-    // A function to update the list of students when the user edit a student 
-    // const updateStudent = (savedStudent) =>{
-    //     setStudents((students) => {
-    //         const newStudents = [];
-    //         for(let student of students){
-    //             if(student.id === savedStudent.id){
-    //                 newStudents.push(savedStudent);
-    //             } else{
-    //                 newStudents.push(student);
-    //             }
-    //         }
-    //         return newStudents;
-    //     })
-
-        // This line is just to close the form! 
-       // setEditingStudentId(null);
-
-    //}
-
-    //A function to grab the student.id of the student that we want to edit
-    // const onEdit = (park) =>{
-    //     const editingId = park.code;
-    //     setEditingStudentId(editingId);
-
-    // }
 
 
     return (
         <div className="parks">
-            <h2> List of Parks </h2>
-            <h3>Person id: {params.userId}</h3>
+            <h2> Favorite Parks List </h2>
+            {/* <h3>HERE: {parks.id} </h3> */}
+            <div>
+                <h3>{props.fullName}</h3>
             <ul>
-                {parks.map((park) => {
-                    // if(park.code === editingParkId){
-                    //     return <Form initialPark={park} savePark={updatePark} />
-                    // } else {
-                        return (
-                        <li key={park.code}> {park.FullName} {park.description} 
-                        {/* <button type="button" onClick={() =>{onDelete(park)}}>X</button>  */}
-                        {/* <button type="button" onClick={() => {onEdit(park)}}>Edit</button> */}
-                        </li>
-                        );
-                    //}
-                    }
+                {parks.map(park => 
+                            <li key={park.id}>
+                            <Link to={`/park-list/${park.parkcode}`}>
+                            {/* {park.parkcode} */}
+                            {park.parkname}
+                            </Link>
+                            <button className="delBtn" type="button" onClick={() => {onDelete(park)}}>REMOVE</button>
+                            </li>
                     )}
-            </ul>
-            {/* <Form savePark={addPark} /> */}
+                    </ul>
+            </div>
+            {/* <Outlet/> */}
+            {/* {JSON.stringify(parks)} */}
         </div>
     );
 }

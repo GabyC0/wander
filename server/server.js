@@ -7,6 +7,7 @@ require('dotenv').config(); //??
 const db = require('../server/db/db-connection.js'); 
 const fetch = require("node-fetch"); 
 const { auth } = require('express-openid-connect');
+const { response } = require('express');
 const apiKey = `${process.env.API_KEY}`;
 const REACT_BUILD_DIR = path.join(__dirname, '..', 'client', 'build');
 const app = express();
@@ -22,6 +23,7 @@ const config = {
 
 
 const PORT = process.env.PORT || 3001;
+console.log('port', PORT);
 app.use(cors());
 app.use(express.json());
 app.use(auth(config));
@@ -52,24 +54,10 @@ app.get('/api/me', async (req, res) => {
     }
 });
 
-//SELECT email FROM users WHERE EXISTS 
 
 app.use(express.static(REACT_BUILD_DIR));
 
-//create the POST request
-//what route?? /api/me or / ??
-// app.post('/api/log-in', cors(), async (req, res) => {
-//     const newUser = { name: req.body.name, nickname: req.body.nickname,  }
-//     console.log([newUser.name, newUser.nickname]);
-//     const result = await db.query(
-//         'INSERT INTO users(name, nickname, email) VALUES($1, $2, $3) RETURNING *',
-//         [newUser.name, newUser.nickname]
-//     );
-//     console.log(result.rows[0]);
-//     res.json(result.rows[0]);
-// });
-
-//get request from API
+//get parks list from the nps API
 app.get("/api/parksInfo", cors(), async (req, res) => {
     const url = `https://developer.nps.gov/api/v1/parks?limit=500&api_key=${apiKey}`;
     console.log("url", url);
@@ -87,25 +75,17 @@ app.get("/api/parksInfo", cors(), async (req, res) => {
 
 });
 
-
-app.get("/api/campInfo/:parkCode", cors(), async (req, res) => {
+//get specific individual park information 
+app.get('/api/parksInfo/:parkCode', cors(), async (req, res) => {
     const parkCode = req.params.parkCode;
-    console.log("parkCode param", parkCode);
 
-    const url = `https://developer.nps.gov/api/v1/campgrounds?parkCode=${parkCode}&api_key=${apiKey}`;
-    // try {
-    //     const response = await fetch(url);
-    //     const data = await response.json();
-    //     console.log("This is the api camp data: ", data);
-    //     res.send(data);
-    // } catch (err) {
-    //     console.error("Fetch error: ", err);
-    // }
+    const url = `https://developer.nps.gov/api/v1/parks?parkCode=${parkCode}&api_key=${apiKey}`;
 
     axios.get(url)
     .then(function (response) {
         // handle success
-        console.log(response.data);
+        console.log('parkCode back', response.data);
+        //if single item respond with single park if not an error
         res.send(response.data);
     })
     .catch(function (error) {
@@ -115,8 +95,10 @@ app.get("/api/campInfo/:parkCode", cors(), async (req, res) => {
     .then(function () {
         // always executed
     });
-// })
 })
+
+
+
 
 //post request for park webcam the user is searching
 // let parkCodeName;
@@ -126,6 +108,8 @@ app.get("/api/campInfo/:parkCode", cors(), async (req, res) => {
 //     //res.redirect("/api?webcam");
 // })
 
+
+//get request for webcam
 app.get("/api/webcam/:parkCode", cors(), async (req, res) => {
     //is this where I should add park code to be used??? 
     const parkCode = req.params.parkCode;
@@ -155,63 +139,70 @@ app.get("/api/webcam/:parkCode", cors(), async (req, res) => {
 })
 
 //create the get request
-const { requiresAuth } = require('express-openid-connect');
+// const { requiresAuth } = require('express-openid-connect');
 
-app.get('/api/faveparks/:id', requiresAuth(), cors(), async (req, res) => {
-    try{
-        const userId = reqparams.contactId;
-        const { rows: faveparks } = await db.query(`SELECT * FROM faveparks WHERE id=$1`, [userId]);
-        res.send(faveparks, );
-    } catch (e){
-        console.log(e);
-        return res.status(400).json({e});
+app.get('/api/userFave', cors(), async (req, res) => {
+    if(req.oidc.isAuthenticated()) {
+        const authUser = await db.query(`SELECT * FROM users WHERE email='${req.oidc.user.email}'`);
+        console.log('authUser result', authUser.rows[0]);
+        const userList = await db.query('SELECT * FROM faveparks  WHERE userid = $1', [authUser.rows[0].id]);
+        console.log('favpark list', userList.rows);
+
+        return res.json(userList.rows);
     }
 });
 
-// //create the POST request
-// app.post('/api/students', cors(), async (req, res) => {
-//     const newUser = { firstname: req.body.firstname, lastname: req.body.lastname }
-//     console.log([newUser.firstname, newUser.lastname]);
-//     const result = await db.query(
-//         'INSERT INTO students(firstname, lastname) VALUES($1, $2) RETURNING *',
-//         [newUser.firstname, newUser.lastname]
-//     );
-//     console.log(result.rows[0]);
-//     res.json(result.rows[0]);
-// });
+//create the POST request
+app.post('/api/parkFave/:parkCode/:fullName', cors(), async (req, res) => {
+
+    const parkCode = req.params.parkCode;
+    const parkName = req.params.fullName;
+
+    const authUser = await db.query(`SELECT * FROM users WHERE email='${req.oidc.user.email}'`);
+    console.log('parkCode for POST', parkCode);
+    const result = await db.query(
+        'INSERT INTO faveparks(userid, parkcode, parkname) VALUES($1, $2, $3) RETURNING *',
+        [authUser.rows[0].id, parkCode, parkName]
+    );
+    console.log(result.rows[0]);
+    res.json(result.rows[0]);
+
+});
 
 
 
 
 // // delete request
-// app.delete('/api/faveparks/:parkId', cors(), async (req, res) =>{
-//     const parkId = req.params.parkId;
-//     //console.log(req.params);
-//     await db.query('DELETE FROM faveparks WHERE id=$1', [parkId]);
-//     res.status(200).end();
+app.delete('/api/userFave/:parkId', cors(), async (req, res) =>{
 
-// });
+    const parkId = req.params.parkId;
+    //console.log(req.params);
+    await db.query(`DELETE FROM faveparks WHERE id=$1`, [parkId]);
+    res.status(200).end();
 
-// // Put request - Update request
-// app.put('/api/students/:studentId', cors(), async (req, res) =>{
-//     const studentId = req.params.studentId;
-//     const updateStudent = { id: req.body.id, firstname: req.body.firstname, lastname: req.body.lastname }
-//     //console.log(req.params);
-//     // UPDATE students SET lastname = 'TestMarch' WHERE id = 1;
-//     console.log(studentId);
-//     console.log(updateStudent);
-//     const query = `UPDATE students SET lastname=$1, firstname=$2 WHERE id = ${studentId} RETURNING *`;
-//     console.log(query);
-//     const values = [updateStudent.lastname, updateStudent.firstname];
-//     try{
-//         const updated = await db.query(query, values);
-//         console.log(updated.rows[0]);
-//         res.send(updated.rows[0]);
-//     } catch (e){
-//         console.log(e);
-//         return res.status(400).json({e});
-//     }
-// });
+});
+
+app.get("/api/campInfo/:parkCode", cors(), async (req, res) => {
+    const parkCode = req.params.parkCode;
+    console.log("parkCode param", parkCode);
+
+    const url = `https://developer.nps.gov/api/v1/campgrounds?parkCode=${parkCode}&api_key=${apiKey}`;
+
+    axios.get(url)
+    .then(function (response) {
+        // handle success
+        console.log(response.data);
+        res.send(response.data);
+    })
+    .catch(function (error) {
+        // handle error
+        console.log(error);
+    })
+    .then(function () {
+        // always executed
+    });
+// })
+})
 
 // console.log that your server is up and running
 app.listen(PORT, () => {
