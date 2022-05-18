@@ -3,12 +3,18 @@
 </div>
 
 
-# WANDER App Overview
+# Why WANDER? - App Overview
 WANDER is an application that helps users take the first step towards their WANDERing journey through the many national parks by providing them with the basic information of any and all the national parks in the country.
+
+For people who: 
+- want to visit/learn more about national parks
+- want a starting/reference point for their planning process
 
 <div align="center">
 <img height="400px" src="https://user-images.githubusercontent.com/74997368/168925387-70a9887c-def0-4cb9-a715-a8f9a5bcb597.png">
 </div>
+
+
 
 ## Techstack
 
