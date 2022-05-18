@@ -1,16 +1,12 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import {Link, Outlet } from 'react-router-dom'
-//const apiKey = `${process.env.API_KEY}`;
+import { Link } from 'react-router-dom'
 
 export const Search = () => {
 
   const [parks, setParks] = useState([]);
   const [foundParks, setFoundParks] = useState(parks);
   const [parkName, setName] = useState('');
-
-
-  //const [value, setValue] = useState(null);
 
   //to use in input to track each change the user types
   const [query, setQuery] = useState("");
@@ -26,21 +22,6 @@ export const Search = () => {
     })
   }, []);
 
-   console.log(query);
-
-   // eslint-disable-next-line array-callback-return
-  //  parks.filter(park => {
-  //   if(query === '') {
-  //     return park;
-  //   } else if (park.name.toLowerCase().includes(query.toLowerCase())) {
-  //     return park;
-  //   }
-  //  }).map((park, index) => {
-  //    <div className="box" key={index}>
-  //      <p>{park.name}</p>
-  //    </div>
-  //  })
-
   const filter = (e) => {
     const keyword = e.target.value;
 
@@ -55,35 +36,29 @@ export const Search = () => {
     setName(keyword);
   };
 
-  // const handleChange = (event) => {
-  //   setValue(event.target.value);
-  // };
+  //Change css of bar
+  //Remove console.logs
 
   return (
-    // <div className="drop-wrapper">
-          <div className="parkList">
-            <div className="plBack">
-            {/* <div className="search"> */}
-            <h2>SEARCH PARK LIST:</h2>
-            <input type="search" value={parkName}placeholder="Enter Park Name" onChange={filter}/>
-            <br/>
-            {/* </div> */}
-            <div className="parkItems">
+    <div className="parkList">
+      <div className="plBack">
+        <h2>SEARCH PARK LIST:</h2>
+        <input type="search" value={parkName}placeholder="Enter Park Name" onChange={filter}/>
+        <br/>
+        <div className="parkItems">
           {foundParks && foundParks.length > 0 ? (foundParks.map((parks, index) => (
-          <Link to={`/park-list/${parks.parkCode}`}>
-          <li key={index}>
-            <span>{parks.name}</span> 
-            <br/>
-            {/* <span>Park description: {parks.description}</span> */}
-          </li>
-          </Link>
+            <Link to={`/park-list/${parks.parkCode}`}>
+              <li key={index}>
+              <span>{parks.name}</span> 
+              <br/>
+              </li>
+            </Link>
           ))
-  ) : (
-    <h3>Results</h3>
-  )}
+          ) : (
+            <h3>Results</h3>
+          )}
+        </div>
       </div>
-      </div>
-      </div>
-        
+    </div>  
   );
 }

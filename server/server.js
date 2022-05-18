@@ -78,13 +78,9 @@ app.get("/api/parksInfo", cors(), async (req, res) => {
 
 });
 
-//get specific single park information 
+//get specific individual park information 
 app.get('/api/parksInfo/:parkCode', cors(), async (req, res) => {
     const parkCode = req.params.parkCode;
-
-    //how to get parkCode from api data coming in and use it here
-    //const getParkCode = response.data.parkCode;
-    //console.log('parkCode and getParkCode ', parkCode, getParkCode); 
 
     const url = `https://developer.nps.gov/api/v1/parks?parkCode=${parkCode}&api_key=${apiKey}`;
 
@@ -105,27 +101,7 @@ app.get('/api/parksInfo/:parkCode', cors(), async (req, res) => {
 })
 
 
-app.get("/api/campInfo/:parkCode", cors(), async (req, res) => {
-    const parkCode = req.params.parkCode;
-    console.log("parkCode param", parkCode);
 
-    const url = `https://developer.nps.gov/api/v1/campgrounds?parkCode=${parkCode}&api_key=${apiKey}`;
-
-    axios.get(url)
-    .then(function (response) {
-        // handle success
-        console.log(response.data);
-        res.send(response.data);
-    })
-    .catch(function (error) {
-        // handle error
-        console.log(error);
-    })
-    .then(function () {
-        // always executed
-    });
-// })
-})
 
 //post request for park webcam the user is searching
 // let parkCodeName;
@@ -209,40 +185,27 @@ app.delete('/api/userFave/:parkId', cors(), async (req, res) =>{
 
 });
 
+app.get("/api/campInfo/:parkCode", cors(), async (req, res) => {
+    const parkCode = req.params.parkCode;
+    console.log("parkCode param", parkCode);
 
+    const url = `https://developer.nps.gov/api/v1/campgrounds?parkCode=${parkCode}&api_key=${apiKey}`;
 
-
-
-
-
-
-
-
-
-
-
-
-
-// // Put request - Update request
-// app.put('/api/students/:studentId', cors(), async (req, res) =>{
-//     const studentId = req.params.studentId;
-//     const updateStudent = { id: req.body.id, firstname: req.body.firstname, lastname: req.body.lastname }
-//     //console.log(req.params);
-//     // UPDATE students SET lastname = 'TestMarch' WHERE id = 1;
-//     console.log(studentId);
-//     console.log(updateStudent);
-//     const query = `UPDATE students SET lastname=$1, firstname=$2 WHERE id = ${studentId} RETURNING *`;
-//     console.log(query);
-//     const values = [updateStudent.lastname, updateStudent.firstname];
-//     try{
-//         const updated = await db.query(query, values);
-//         console.log(updated.rows[0]);
-//         res.send(updated.rows[0]);
-//     } catch (e){
-//         console.log(e);
-//         return res.status(400).json({e});
-//     }
-// });
+    axios.get(url)
+    .then(function (response) {
+        // handle success
+        console.log(response.data);
+        res.send(response.data);
+    })
+    .catch(function (error) {
+        // handle error
+        console.log(error);
+    })
+    .then(function () {
+        // always executed
+    });
+// })
+})
 
 // console.log that your server is up and running
 app.listen(PORT, () => {

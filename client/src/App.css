@@ -39,13 +39,16 @@ body {
   left: 10%;
   width: 120px;
   padding-top: 2%;
-  cursor: pointer;
 }
 
 .btnDiv button {
   background-color: #9F8643;
   padding: .35rem;
   border-radius: 8px;
+  height: 40px;
+  width: 140px;
+  cursor: pointer;
+  font-size: 1rem;
 }
 
 .about {
@@ -138,7 +141,7 @@ body {
   width: 60%;
   margin: auto;
   padding: 0 15px 15px;
-  background-color: #5A767B;
+  background-color:#5A767B;
   padding: 2%;
   border-radius: 25px;
   margin-top: 3%;
