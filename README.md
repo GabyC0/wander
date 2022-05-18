@@ -113,7 +113,7 @@ WANDER is an application that helps users take the first step towards their WAND
 </div>
 
 
-### Installation
+## Installation
 
 ###Prereq
 
