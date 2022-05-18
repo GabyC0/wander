@@ -115,7 +115,7 @@ WANDER is an application that helps users take the first step towards their WAND
 
 ## Installation
 
-###Prereq
+### Prereq
 
 **Docker**
 
