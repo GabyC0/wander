@@ -62,6 +62,7 @@ function FaveParks(props) {
     return (
         <div className="parks">
             <h2> Favorite Parks List </h2>
+            <hr className="line"></hr>
             {/* <h3>HERE: {parks.id} </h3> */}
             <div>
                 <h3>{props.fullName}</h3>

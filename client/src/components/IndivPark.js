@@ -100,56 +100,19 @@ export const IndivPark = (props) => {
             <br/>
             *Add campsite link here*
             <br/>
-            Images
 
-        <div style={{ display: 'block', width: 700, padding: 30}}>
-          <h4>Carousel</h4>
-          <Carousel>
-            {images.map(image => 
-            <Carousel.Item interval={1500}>
-              <img style={{ width: "400px" }} alt={image.alt} src={image.url}></img> 
-            </Carousel.Item>
-            )}
-          </Carousel>
-        </div>
-          
-
-
-
-
-
-
-            {/* <Carousel>
-              <Carousel.Item interval={500}>
-              
+        <div className="carousel">
+          <h4>Park Images</h4>
+          <div>
+            <Carousel>
               {images.map(image => 
-                
-                  
-                    <>
-                    
-              <div class="carousel-item active">
-              <div class="carousel-slide">
-                  <img style={{ width: "400px" }} alt={image.alt} src={image.url}></img>
-                </div>
-                </div> */}
-                {/* <Carousel.Caption>
-                    <h3>{image.caption}</h3>
-                  </Carousel.Caption> */}
-                  {/* </> */}
-              {/* )} */}
-              
-               {/* </Carousel.Item>
-             </Carousel> */}
-
-
-            {/* <div class="img-container">
-              <img alt="" src={park.images.map((e,i)) => 
-                
-                [0].url} style={{width: '500px'}}></img>
-            </div> */}
-            {/* {park.images[0].title} */}
-            <br/>
-            {/* <img alt="" src={park.images[0].url} style={{width:'500px'}}></img> */}
+              <Carousel.Item interval={1800}>
+                <img style={{ width: "400px" }} alt={image.alt} src={image.url}></img> 
+              </Carousel.Item>
+              )}
+            </Carousel>
+          </div>
+        </div>
         </div>
     </div>
   )

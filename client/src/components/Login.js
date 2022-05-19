@@ -38,7 +38,7 @@ export const Login = () => {
                     </li>
                     ) : (
                     <li>Hello, {user.given_name} 
-                        <button>
+                        <button className="login">
                             <a href="http://localhost:3001/logout">Logout</a>
                         </button>
                     </li>

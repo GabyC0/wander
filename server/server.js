@@ -3,7 +3,6 @@ const cors = require('cors');
 const axios = require('axios').default;
 require("dotenv").config();
 const path = require('path');
-require('dotenv').config(); //??
 const db = require('../server/db/db-connection.js'); 
 const fetch = require("node-fetch"); 
 const { auth } = require('express-openid-connect');

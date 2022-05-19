@@ -22,9 +22,11 @@ export const ParkList = () => {
       <Search/>
       <div className="parkListBack">
       <h1 className="listH2">PARK LIST</h1>
+      <hr className="line"></hr>
+      <br></br>
           <div className="listText">
             {parks.map(park =>
-              <Link to={`/park-list/${park.parkCode}`}>
+              <Link className="listLink" to={`/park-list/${park.parkCode}`}>
                 <ul className='parkList'>
                     <li className="singlePark"
                     key={park.parkCode}> 
