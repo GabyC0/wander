@@ -184,6 +184,15 @@ If you want to try it with Auth0, the frontend needs to be setup with the follow
    - These can be obtained by signing up for an Auth0 account and [Registering a Single-Page Web Application](https://auth0.com/docs/get-started) in order to get these values
    - This [graphic](https://images.ctfassets.net/23aumh6u8s0i/1DyyZTcfbJHw577T6K2KZk/a8cabcec991c9ed33910a23836e53b76/auth0-application-settings) from [Auth0's guide](https://auth0.com/blog/complete-guide-to-react-user-authentication/#Connect-React-with-Auth0) may be helpful to locating them
 
+## Testing
+#### Jest Testing
+
+To run tests on the terminal:
+- On client side run the following command:
+
+```sh
+   npm test
+   ```
 
 ## Future Development
 - Incorporate Google Maps API to view park locations on a map with markers
