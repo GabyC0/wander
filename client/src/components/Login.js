@@ -33,13 +33,13 @@ export const Login = () => {
                 {!user ? (
                     <li>
                         <button className="login">
-                            <a href="http://localhost:3001/login">Login</a>
+                            <a href="https://wander-app1.herokuapp.com/login">Login</a>
                         </button>
                     </li>
                     ) : (
                     <li>Hello, {user.given_name} 
                         <button className="login">
-                            <a href="http://localhost:3001/logout">Logout</a>
+                            <a href="https://wander-app1.herokuapp.com/logout">Logout</a>
                         </button>
                     </li>
                 )}

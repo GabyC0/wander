@@ -26,6 +26,7 @@ console.log('port', PORT);
 app.use(cors());
 app.use(express.json());
 app.use(auth(config));
+app.use(express.static(REACT_BUILD_DIR));
 
 //creates an endpoint for the route /api
 app.get('/', (req, res) => {
@@ -53,8 +54,6 @@ app.get('/api/me', async (req, res) => {
     }
 });
 
-
-app.use(express.static(REACT_BUILD_DIR));
 
 //get parks list from the nps API
 app.get("/api/parksInfo", cors(), async (req, res) => {
