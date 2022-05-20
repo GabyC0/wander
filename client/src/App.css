@@ -359,10 +359,6 @@ a {
     left: 6.5%;
   }
 
-  .home div:nth-of-type(2) h3 {
-    color:#274301;
-  }
-
   .parkList {
     width: 90%;
   }
@@ -425,6 +421,29 @@ a {
   .parks ul {
     width: 100%;
     padding: none;
+  }
+
+  .navigation {
+    justify-content: flex;
+    flex-direction: column;
+
+  }
+
+  .nav-ul {
+    margin-right: 0;
+    margin-left: 0;
+    width: 100%;
+    padding-left: 0;
+  }
+
+  .nav-ul li:nth-of-type(5) li{
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .nav-ul li:nth-of-type(5) {
+    margin-left: 0;
+    margin-right: 0;
   }
 
 }
