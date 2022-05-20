@@ -102,6 +102,10 @@ body {
   color: white;
 }
 
+nav a:hover {
+  color: white;
+}
+
 /* .login a {
 } */
 
@@ -434,6 +438,10 @@ a {
     margin-left: 0;
     width: 100%;
     padding-left: 0;
+  }
+
+  .nav-ul li a {
+    font-size: 12px;
   }
 
   .nav-ul li:nth-of-type(5) li{
