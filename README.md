@@ -2,12 +2,27 @@
   <img height="200" src="https://user-images.githubusercontent.com/74997368/169147913-6c1a97c0-2a30-42b8-8357-0c0eba6158d8.png">
 </div>
 
+ <div align="center">
+    <a href="https://wander-app1.herokuapp.com/">Heroku Link</a> | <a href="https://github.com/GabyC0/wander/issues">Report Issues/Request Feature</a>
+</div>
 
-# Why WANDER? - App Overview
+# Contents
 
-<a href="https://wander-app1.herokuapp.com/">Heroku Link</a>
-<br/>
-<br/>
+  - [About](#why-wander---app-overview)
+  - [Tech Stack](#techstack)
+  - [APIs](#apis)
+  [Drawing Board](#drawing-board)
+  - [Style Guide](#style-guide)
+  - - [Wireframe](#wireframe)
+  - - [Data Model](#data-model)
+  - - [User Flow](#user-flow)
+  - [Installation](#installation)
+  - [Testing](#testing)
+  - [Future Development](#future-development)
+
+
+## Why WANDER? - App Overview
+
 WANDER is an application that helps users take the first step towards their WANDERing journey through the many national parks by providing them with the basic information of any and all the national parks in the country.
 
 For people who: 
