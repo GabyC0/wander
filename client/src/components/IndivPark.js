@@ -1,6 +1,7 @@
 import React from 'react'
 import {useState, useEffect} from 'react'
 import {useParams} from 'react-router-dom'
+// import 'bootstrap/dist/css/bootstrap/Carousel'
 import Carousel from 'react-bootstrap/Carousel';
 
 export const IndivPark = (props) => {
@@ -11,7 +12,6 @@ export const IndivPark = (props) => {
   //original state for individual park
   const [park, setPark] = useState([]);
   const [images, setImages] = useState([]);
-  // const [faveParks, setFaveParks] = useState([]);
   // const [buttonText, setButtonText] = useState("ADD TO LIST");
 
 
@@ -32,14 +32,11 @@ export const IndivPark = (props) => {
       body: JSON.stringify(newPark)
     }).then((response) => {
       return response.json()
+    }).then((data) => {
+      console.log("From the post ", data);
+      //props.loadParks(data);
     })
   }
-
-  const onDelete = async (park) => {
-    return fetch(`/api/userFave/${park.id}`, {
-        method: "DELETE"
-    })
-}
 
   // const changeText = () => {
   //   setButtonText("DELETE");
@@ -49,8 +46,9 @@ export const IndivPark = (props) => {
     e.preventDefault();
     if(park.parkCode) {
       postPark(park);
-      onDelete(park);
       // setButtonText("REMOVE");
+    } else {
+      onDelete(params.favepark);
     }
   };
 
@@ -70,19 +68,22 @@ export const IndivPark = (props) => {
             })
     };
 
-    const loadParks = () => {
-      fetch("/api/userFave")
-          .then((response) => response.json())
-  }
-
     useEffect(() => {
         loadUser();
-        loadParks();
     }, []);
 
     //To add: 
     //When added to faves change the ADD TO LIST text to Added or remove the button
     //Add campsite info with own campsite page
+
+    const onDelete = async (favepark) => {
+      return fetch(`/api/userFave/${favepark.id}`, {
+          method: "DELETE"
+      })
+  }
+
+
+
 
   return (
     <div className="indivPark">
@@ -90,15 +91,16 @@ export const IndivPark = (props) => {
       <h2>
       <br/>
       {park.fullName}
+      {park.id}
       </h2>
       </div>
         <div className="indivDesc"> 
             {park.description}
             <br/>
             <br/>
-            {user && park.id &&
+            {user && 
             <>
-            <button type="button" onClick={handleSubmit}>{!park.id ? "ADD TO LIST" : "REMOVE"}</button>
+            <button type="button" onClick={handleSubmit}>{!params.faveparks.id ? "ADD TO LIST" : "REMOVE"}</button>
             </>
           }
             <br/>
