@@ -12,7 +12,6 @@ export const IndivPark = (props) => {
   //original state for individual park
   const [park, setPark] = useState([]);
   const [images, setImages] = useState([]);
-  // const [buttonText, setButtonText] = useState("ADD TO LIST");
 
 
   useEffect(() => {
@@ -38,17 +37,10 @@ export const IndivPark = (props) => {
     })
   }
 
-  // const changeText = () => {
-  //   setButtonText("DELETE");
-  // }
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if(park.parkCode) {
       postPark(park);
-      // setButtonText("REMOVE");
-    } else {
-      onDelete(params.favepark);
     }
   };
 
@@ -76,14 +68,7 @@ export const IndivPark = (props) => {
     //When added to faves change the ADD TO LIST text to Added or remove the button
     //Add campsite info with own campsite page
 
-    const onDelete = async (favepark) => {
-      return fetch(`/api/userFave/${favepark.id}`, {
-          method: "DELETE"
-      })
-  }
-
-
-
+    
 
   return (
     <div className="indivPark">
@@ -100,7 +85,7 @@ export const IndivPark = (props) => {
             <br/>
             {user && 
             <>
-            <button type="button" onClick={handleSubmit}>{!params.faveparks.id ? "ADD TO LIST" : "REMOVE"}</button>
+            <button type="button" onClick={handleSubmit}>ADD TO LIST</button>
             </>
           }
             <br/>
