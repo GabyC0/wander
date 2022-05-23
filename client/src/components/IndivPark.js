@@ -1,18 +1,17 @@
 import React from 'react'
 import {useState, useEffect} from 'react'
 import {useParams} from 'react-router-dom'
-// import 'bootstrap/dist/css/bootstrap/Carousel'
 import Carousel from 'react-bootstrap/Carousel';
 
 export const IndivPark = (props) => {
   let params = useParams();
 
-  const [buttonText, setButtonText] = useState("ADD TO LIST");
+  
 
-  console.log('params', params);
   //original state for individual park
   const [park, setPark] = useState([]);
   const [images, setImages] = useState([]);
+  // const [buttonText, setButtonText] = useState("ADD TO LIST");
 
 
   useEffect(() => {
@@ -22,10 +21,6 @@ export const IndivPark = (props) => {
       
       setPark(park.data[0]);
       setImages(park.data[0].images)
-      console.log('images arr', park.data[0].images)
-      console.log('parks in front', park.data);
-      //or park.data
-      //setParks(parks);
     })
   }, []);
 
@@ -36,16 +31,24 @@ export const IndivPark = (props) => {
       body: JSON.stringify(newPark)
     }).then((response) => {
       return response.json()
-    }).then((data) => {
-      console.log("From the post ", data);
-      //props.loadParks(data);
     })
   }
+
+  const onDelete = async (park) => {
+    return fetch(`/api/userFave/${park.id}`, {
+        method: "DELETE"
+    })
+}
+
+  // const changeText = () => {
+  //   setButtonText("DELETE");
+  // }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if(park.parkCode) {
       postPark(park);
+      // setButtonText("REMOVE");
     }
   };
 
@@ -88,6 +91,8 @@ export const IndivPark = (props) => {
             {user && 
             <>
             <button type="button" onClick={handleSubmit}>ADD TO LIST</button>
+            :
+            <button className="delBtn" type="button" onClick={() => {onDelete(park)}}>REMOVE</button>
             </>
           }
             <br/>
