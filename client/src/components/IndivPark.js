@@ -11,6 +11,7 @@ export const IndivPark = (props) => {
   //original state for individual park
   const [park, setPark] = useState([]);
   const [images, setImages] = useState([]);
+  // const [faveParks, setFaveParks] = useState([]);
   // const [buttonText, setButtonText] = useState("ADD TO LIST");
 
 
@@ -48,6 +49,7 @@ export const IndivPark = (props) => {
     e.preventDefault();
     if(park.parkCode) {
       postPark(park);
+      onDelete(park);
       // setButtonText("REMOVE");
     }
   };
@@ -68,8 +70,14 @@ export const IndivPark = (props) => {
             })
     };
 
+    const loadParks = () => {
+      fetch("/api/userFave")
+          .then((response) => response.json())
+  }
+
     useEffect(() => {
         loadUser();
+        loadParks();
     }, []);
 
     //To add: 
@@ -88,11 +96,9 @@ export const IndivPark = (props) => {
             {park.description}
             <br/>
             <br/>
-            {user && 
+            {user && park.id &&
             <>
-            <button type="button" onClick={handleSubmit}>ADD TO LIST</button>
-            :
-            <button className="delBtn" type="button" onClick={() => {onDelete(park)}}>REMOVE</button>
+            <button type="button" onClick={handleSubmit}>{!park.id ? "ADD TO LIST" : "REMOVE"}</button>
             </>
           }
             <br/>
