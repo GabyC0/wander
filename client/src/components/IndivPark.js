@@ -7,19 +7,13 @@ import Carousel from 'react-bootstrap/Carousel';
 export const IndivPark = (props) => {
   let params = useParams();
 
+  const [buttonText, setButtonText] = useState("ADD TO LIST");
+
   console.log('params', params);
   //original state for individual park
   const [park, setPark] = useState([]);
   const [images, setImages] = useState([]);
 
-  //state of added parks
-  //const [parks, setParks] = useState([])
-
-  // const loadParks = () => {
-  //   fetch("/api/userFave")
-  //     .then((response) => response.json())
-  //     .then(parks)
-  // }
 
   useEffect(() => {
     fetch(`/api/parksInfo/${params.parkCode}`)
@@ -92,13 +86,13 @@ export const IndivPark = (props) => {
             <br/>
             <br/>
             {user && 
-            <><button type="button" onClick={handleSubmit}>ADD TO LIST</button>
+            <>
+            <button type="button" onClick={handleSubmit}>ADD TO LIST</button>
             </>
           }
             <br/>
             <a href={park.directionsUrl}>Directions</a>
             <br/>
-            *Add campsite link here*
             <br/>
 
         <div className="carousel">

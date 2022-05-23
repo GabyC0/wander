@@ -22,7 +22,7 @@ const config = {
 
 
 const PORT = process.env.PORT || 3001;
-console.log('port', PORT);
+
 app.use(cors());
 app.use(express.json());
 app.use(auth(config));
@@ -30,9 +30,9 @@ app.use(express.static(REACT_BUILD_DIR));
 
 //creates an endpoint for the route /api
 app.get('/', (req, res) => {
-    // console.log(req.oidc.isAuthenticated());
     res.sendFile(path.join(REACT_BUILD_DIR, 'index.html'));
 });
+
 //route for user authentication
 app.get('/api/me', async (req, res) => {
     console.log(req.oidc.isAuthenticated());
@@ -62,15 +62,12 @@ app.get("/api/parksInfo", cors(), async (req, res) => {
     axios.get(url)
         .then(function (response) {
             // handle success
-            console.log(response.data);
-            //return response;
             res.send(response.data);
     })
         .catch(function (error) {
             // handle error
             console.log(error);
     });
-
 });
 
 //get specific individual park information 
@@ -82,63 +79,16 @@ app.get('/api/parksInfo/:parkCode', cors(), async (req, res) => {
     axios.get(url)
     .then(function (response) {
         // handle success
-        console.log('parkCode back', response.data);
-        //if single item respond with single park if not an error
+            //if single park respond with single park info if not, an error
         res.send(response.data);
     })
     .catch(function (error) {
         // handle error
         console.log(error);
     })
-    .then(function () {
-        // always executed
-    });
-})
-
-
-
-
-//post request for park webcam the user is searching
-// let parkCodeName;
-// app.post("/api/webcam-park", (req, res) => {
-//     parkCodeName = req.body.parkCode;
-//     //change redirect??
-//     //res.redirect("/api?webcam");
-// })
-
-
-//get request for webcam
-app.get("/api/webcam/:parkCode", cors(), async (req, res) => {
-    //is this where I should add park code to be used??? 
-    const parkCode = req.params.parkCode;
-    const url = `https://developer.nps.gov/api/v1/webcams?parkCode=${parkCode}&api_key=${apiKey}`;
-    // try {
-    //     const response = await fetch(url);
-    //     const data = await response.json();
-    //     console.log("This is the webcam data: ", data);
-    //     res.send(data);
-    // } catch (err) {
-    //     console.error("Fetch error:", err);
-    // }
-
-    axios.get(url)
-    .then(function (response) {
-        // handle success
-        console.log(response.data);
-        res.send(response.data);
-})
-    .catch(function (error) {
-        // handle error
-        console.log(error);
-})
-    .then(function () {
-        // always executed
 });
-})
 
-//create the get request
-// const { requiresAuth } = require('express-openid-connect');
-
+//create the get request for users personal favorites list
 app.get('/api/userFave', cors(), async (req, res) => {
     if(req.oidc.isAuthenticated()) {
         const authUser = await db.query(`SELECT * FROM users WHERE email='${req.oidc.user.email}'`);
@@ -206,3 +156,35 @@ app.get("/api/campInfo/:parkCode", cors(), async (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`);
 });
+
+//for future development- live webcam footage
+
+//post request for park webcam the user is searching
+// let parkCodeName;
+// app.post("/api/webcam-park", (req, res) => {
+//     parkCodeName = req.body.parkCode;
+//     //change redirect??
+//     //res.redirect("/api?webcam");
+// })
+
+
+//get request for webcam
+//app.get("/api/webcam/:parkCode", cors(), async (req, res) => {
+    //is this where I should add park code to be used??? 
+    //const parkCode = req.params.parkCode;
+    //const url = `https://developer.nps.gov/api/v1/webcams?parkCode=${parkCode}&api_key=${apiKey}`;
+
+    //axios.get(url)
+    //.then(function (response) {
+        // handle success
+        //console.log(response.data);
+        //res.send(response.data);
+//})
+    //.catch(function (error) {
+        // handle error
+        //console.log(error);
+//})
+    //.then(function () {
+        // always executed
+//});
+//})

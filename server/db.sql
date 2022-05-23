@@ -28,7 +28,8 @@ CREATE TABLE public.faveparks (
     id integer NOT NULL,
     userid integer NOT NULL,
     parkcode character varying(255) NOT NULL,
-    added timestamp with time zone DEFAULT CURRENT_TIMESTAMP
+    added timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
+    parkname character varying(255)
 );
 
 
@@ -81,10 +82,17 @@ ALTER TABLE public.users ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
 -- Data for Name: faveparks; Type: TABLE DATA; Schema: public; Owner: gaby
 --
 
-COPY public.faveparks (id, userid, parkcode, added) FROM stdin;
-1	1	YNP	2022-04-26 10:16:06.283604-07
-2	1	ZNP	2022-04-26 10:16:16.482068-07
-3	3	colt	2022-05-05 13:23:27.656278-07
+COPY public.faveparks (id, userid, parkcode, added, parkname) FROM stdin;
+1	1	boha	2022-04-26 10:16:06.283604-07	Boston Harbor Islands National Recreation Area
+3	3	colt	2022-05-05 13:23:27.656278-07	Coltsville National Historical Park
+2	1	bicr	2022-04-26 10:16:16.482068-07	Birmingham Civil Rights National Monument
+8	3	acad	2022-05-13 11:31:09.321044-07	Acadia
+22	1	afbg	2022-05-16 12:03:47.566716-07	African Burial Ground National Monument
+23	1	abli	2022-05-16 12:11:01.694634-07	Abraham Lincoln Birthplace National Historical Park
+25	1	grca	2022-05-16 23:14:18.835366-07	Grand Canyon National Park
+26	1	yose	2022-05-16 23:18:10.67535-07	Yosemite National Park
+27	1	zion	2022-05-17 08:21:38.092768-07	Zion National Park
+28	1	alca	2022-05-17 18:17:45.192619-07	Alcatraz Island
 \.
 
 
@@ -104,7 +112,7 @@ COPY public.users (id, name, nickname, created, email) FROM stdin;
 -- Name: faveparks_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gaby
 --
 
-SELECT pg_catalog.setval('public.faveparks_id_seq', 3, true);
+SELECT pg_catalog.setval('public.faveparks_id_seq', 29, true);
 
 
 --
