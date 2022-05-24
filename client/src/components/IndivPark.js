@@ -76,7 +76,6 @@ export const IndivPark = (props) => {
       <h2>
       <br/>
       {park.fullName}
-      {park.id}
       </h2>
       </div>
         <div className="indivDesc"> 
