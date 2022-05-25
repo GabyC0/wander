@@ -1,7 +1,6 @@
 import React from 'react'
 import {useState, useEffect} from 'react'
 import {useParams} from 'react-router-dom'
-// import 'bootstrap/dist/css/bootstrap/Carousel'
 import Carousel from 'react-bootstrap/Carousel';
 
 export const IndivPark = (props) => {
@@ -31,9 +30,6 @@ export const IndivPark = (props) => {
       body: JSON.stringify(newPark)
     }).then((response) => {
       return response.json()
-    }).then((data) => {
-      console.log("From the post ", data);
-      //props.loadParks(data);
     })
   }
 

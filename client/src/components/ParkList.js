@@ -8,12 +8,9 @@ export const ParkList = () => {
 
   useEffect(() => {
     fetch("/api/parksInfo")
-    //`https://developer.nps.gov/api/v1/parks?api_key=${apiKey}`
     .then((response) => response.json())
     .then(parks => {
       setParks(parks.data);
-      console.log("here are park names", parks);
-      console.log("park code ", parks.data);
     })
   }, []);
 
@@ -31,8 +28,6 @@ export const ParkList = () => {
                     <li className="singlePark"
                     key={park.parkCode}> 
                     <h4><b>{park.fullName}</b></h4>
-                    {/* <br/>
-                    <br/> */}
                     </li> 
                     <span>Park Code: {park.parkCode}</span>  <span>State: {park.states}</span>
                     

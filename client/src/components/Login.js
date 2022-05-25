@@ -3,8 +3,6 @@ import { useState, useEffect } from 'react';
 
 export const Login = () => {
     
-//move all this to app or home?? Then add {user} as a prop and to <Login user={user}/>
-//{user ? <userList /> : (<h3>Please login to add edit favorite list</h3>)}
     const [user, setUser] = useState(undefined);
 
     const loadUser = () => {
@@ -29,7 +27,6 @@ export const Login = () => {
   return (
     <div>
         <div>
-            {/* <button className="login"> */}
                 {!user ? (
                     <li>
                         <button className="login">
@@ -43,7 +40,6 @@ export const Login = () => {
                         </button>
                     </li>
                 )}
-            {/* </button> */}
         </div>
         <div>
             {!user}

@@ -8,12 +8,6 @@ import FaveParks from './components/FaveParks';
 import {ParkList} from './components/ParkList';
 import {Home} from './components/Home';
 
-// test('renders learn react link', () => {
-//   render(<App />);
-//   const linkElement = screen.getByText(/learn react/i);
-//   expect(linkElement).toBeInTheDocument();
-// });
-
 describe("Login", () => {
   test("renders my login component", () => {
     render(<Login />);

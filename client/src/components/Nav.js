@@ -5,13 +5,6 @@ import { useState, useEffect } from 'react';
 
 
 export const Nav = () => {
-        //State to hide/show on nav bar
-        // const [hide, setHide] = useState(undefined);
-
-        // const login = () => {
-        //     setHide(false);
-        // }
-
 
     const [user, setUser] = useState(undefined);
 
@@ -56,7 +49,6 @@ export const Nav = () => {
                 }
                 <li>
                     <Login />
-                    {/* <button className="login" onClick={<Login/>}>Login</button> */}
                 </li>
             </ul>
         </nav>

@@ -13,12 +13,9 @@ export const Search = () => {
 
   useEffect(() => {
     fetch("/api/parksInfo")
-    //`https://developer.nps.gov/api/v1/parks?api_key=${apiKey}`
     .then((response) => response.json())
     .then(parks => {
       setParks(parks.data);
-      console.log("here are park names", parks);
-      console.log("park code ", parks.data);
     })
   }, []);
 
@@ -33,11 +30,10 @@ export const Search = () => {
     } else {
       setFoundParks(parks);
     }
-    setName(keyword);
+      setName(keyword);
   };
 
-  //Change css of bar
-  //Remove console.logs
+  //Future: change css of bar
 
   return (
     <div className="parkList">
