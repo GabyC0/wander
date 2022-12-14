@@ -82,30 +82,26 @@ ALTER TABLE public.users ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
 -- Data for Name: faveparks; Type: TABLE DATA; Schema: public; Owner: gaby
 --
 
-COPY public.faveparks (id, userid, parkcode, added, parkname) FROM stdin;
-1	1	boha	2022-04-26 10:16:06.283604-07	Boston Harbor Islands National Recreation Area
-3	3	colt	2022-05-05 13:23:27.656278-07	Coltsville National Historical Park
-2	1	bicr	2022-04-26 10:16:16.482068-07	Birmingham Civil Rights National Monument
-8	3	acad	2022-05-13 11:31:09.321044-07	Acadia
-22	1	afbg	2022-05-16 12:03:47.566716-07	African Burial Ground National Monument
-23	1	abli	2022-05-16 12:11:01.694634-07	Abraham Lincoln Birthplace National Historical Park
-25	1	grca	2022-05-16 23:14:18.835366-07	Grand Canyon National Park
-26	1	yose	2022-05-16 23:18:10.67535-07	Yosemite National Park
-27	1	zion	2022-05-17 08:21:38.092768-07	Zion National Park
-28	1	alca	2022-05-17 18:17:45.192619-07	Alcatraz Island
-\.
+INSERT INTO public.faveparks (id, userid, parkcode, added, parkname) OVERRIDING SYSTEM VALUE VALUES (1, 1, 'boha', '2022-04-26 10:16:06.283604-07', 'Boston Harbor Islands National Recreation Area');
+INSERT INTO public.faveparks (id, userid, parkcode, added, parkname) OVERRIDING SYSTEM VALUE VALUES (3, 3, 'colt', '2022-05-05 13:23:27.656278-07', 'Coltsville National Historical Park');
+INSERT INTO public.faveparks (id, userid, parkcode, added, parkname) OVERRIDING SYSTEM VALUE VALUES (2, 1, 'bicr', '2022-04-26 10:16:16.482068-07', 'Birmingham Civil Rights National Monument');
+INSERT INTO public.faveparks (id, userid, parkcode, added, parkname) OVERRIDING SYSTEM VALUE VALUES (8, 3, 'acad', '2022-05-13 11:31:09.321044-07', 'Acadia');
+INSERT INTO public.faveparks (id, userid, parkcode, added, parkname) OVERRIDING SYSTEM VALUE VALUES (22, 1, 'afbg', '2022-05-16 12:03:47.566716-07', 'African Burial Ground National Monument');
+INSERT INTO public.faveparks (id, userid, parkcode, added, parkname) OVERRIDING SYSTEM VALUE VALUES (23, 1, 'abli', '2022-05-16 12:11:01.694634-07', 'Abraham Lincoln Birthplace National Historical Park');
+INSERT INTO public.faveparks (id, userid, parkcode, added, parkname) OVERRIDING SYSTEM VALUE VALUES (25, 1, 'grca', '2022-05-16 23:14:18.835366-07', 'Grand Canyon National Park');
+INSERT INTO public.faveparks (id, userid, parkcode, added, parkname) OVERRIDING SYSTEM VALUE VALUES (26, 1, 'yose', '2022-05-16 23:18:10.67535-07', 'Yosemite National Park');
+INSERT INTO public.faveparks (id, userid, parkcode, added, parkname) OVERRIDING SYSTEM VALUE VALUES (27, 1, 'zion', '2022-05-17 08:21:38.092768-07', 'Zion National Park');
+INSERT INTO public.faveparks (id, userid, parkcode, added, parkname) OVERRIDING SYSTEM VALUE VALUES (28, 1, 'alca', '2022-05-17 18:17:45.192619-07', 'Alcatraz Island');
 
 
 --
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: gaby
 --
 
-COPY public.users (id, name, nickname, created, email) FROM stdin;
-1	Gaby	Gabs	2022-04-26 10:15:02.94746-07	camposgaby101@gmail.com
-3	Gabriela Campos	gabycamposcontact	2022-05-04 18:52:33.652853-07	gabycamposcontact@gmail.com
-4	Gabriela Campos	contactgabyc	2022-05-04 23:53:53.350204-07	contactgabyc@gmail.com
-5	Gabriela Campos	gabriela.campos	2022-05-04 23:59:08.210201-07	gabriela.campos@sausdlearns.net
-\.
+INSERT INTO public.users (id, name, nickname, created, email) OVERRIDING SYSTEM VALUE VALUES (1, 'Gaby', 'Gabs', '2022-04-26 10:15:02.94746-07', 'camposgaby101@gmail.com');
+INSERT INTO public.users (id, name, nickname, created, email) OVERRIDING SYSTEM VALUE VALUES (3, 'Gabriela Campos', 'gabycamposcontact', '2022-05-04 18:52:33.652853-07', 'gabycamposcontact@gmail.com');
+INSERT INTO public.users (id, name, nickname, created, email) OVERRIDING SYSTEM VALUE VALUES (4, 'Gabriela Campos', 'contactgabyc', '2022-05-04 23:53:53.350204-07', 'contactgabyc@gmail.com');
+INSERT INTO public.users (id, name, nickname, created, email) OVERRIDING SYSTEM VALUE VALUES (5, 'Gabriela Campos', 'gabriela.campos', '2022-05-04 23:59:08.210201-07', 'gabriela.campos@sausdlearns.net');
 
 
 --
