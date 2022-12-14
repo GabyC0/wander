@@ -8,9 +8,9 @@ export const ParkList = () => {
 
   useEffect(() => {
     fetch("/api/parksInfo")
-    .then((response) => response.json())
-    .then(parks => {
-      setParks(parks.data);
+      .then((response) => response.json())
+      .then(parks => {
+        setParks(parks.data);
     })
   }, []);
 
