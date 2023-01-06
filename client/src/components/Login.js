@@ -30,13 +30,13 @@ export const Login = () => {
                 {!user ? (
                     <li>
                         <button className="login">
-                            <a href="dev-9jvzfkq7.us.auth0.com">Login</a>
+                            <a href="https://dev-9jvzfkq7.us.auth0.com">Login</a>
                         </button>
                     </li>
                     ) : (
                     <li>Hello, {user.given_name} 
                         <button className="login">
-                            <a href="dev-9jvzfkq7.us.auth0.com">Logout</a>
+                            <a href="https://dev-9jvzfkq7.us.auth0.com">Logout</a>
                         </button>
                     </li>
                 )}
