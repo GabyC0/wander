@@ -49,7 +49,7 @@ export const ParkList = () => {
           </div>
         <Outlet/>
         </div>
-        <div>
+        <div className="pageDiv">
           <ReactPaginate
             previousLabel={"prev"}
             nextLabel={"next"}
