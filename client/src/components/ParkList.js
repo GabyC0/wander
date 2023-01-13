@@ -26,7 +26,7 @@ export const ParkList = () => {
   }, [offset,perPage]);
 
   return (
-    <div className="parkList">
+    <div className="parkList" style={{marginBottom: "5rem"}}>
       <Search/>
       <div className="parkListBack">
       <h1 className="listH2">PARK LIST</h1>
