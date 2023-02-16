@@ -5,11 +5,10 @@ import { Link } from 'react-router-dom'
 export const Search = () => {
 
   const [parks, setParks] = useState([]);
-  const [foundParks, setFoundParks] = useState(parks);
-  const [parkName, setName] = useState('');
+  const [matchingParks, setMatchingParks] = useState(parks);
+  const [parkName, setParkName] = useState('');
 
-  //to use in input to track each change the user types
-  const [query, setQuery] = useState("");
+  //to use in input for tracking each change the user types
 
   useEffect(() => {
     fetch("/api/parksInfo")
@@ -19,18 +18,15 @@ export const Search = () => {
     })
   }, []);
 
-  const filter = (e) => {
+  const filterParkNames = (e) => {
     const keyword = e.target.value;
-
-    if(keyword !== '') {
-      const results = parks.filter((park) => {
-        return park.name.toLowerCase().startsWith(keyword.toLowerCase());
-      });
-      setFoundParks(results);
+    if(keyword === '') {
+      setMatchingParks(parks);
     } else {
-      setFoundParks(parks);
+      const match = parks.filter((park) => park.name.toLowerCase().startsWith(keyword.toLowerCase()));
+      setMatchingParks(match);
     }
-      setName(keyword);
+    setParkName(keyword);
   };
 
   //Future: change css of bar
@@ -39,10 +35,10 @@ export const Search = () => {
     <div className="parkList">
       <div className="plBack">
         <h2>SEARCH PARK LIST:</h2>
-        <input type="search" value={parkName}placeholder="Enter Park Name" onChange={filter}/>
+        <input type="search" value={parkName} placeholder="Enter Park Name" onChange={filterParkNames}/>
         <br/>
         <div className="parkItems">
-          {foundParks && foundParks.length > 0 ? (foundParks.map((parks, index) => (
+          {matchingParks && matchingParks.length > 0 ? (matchingParks.map((parks, index) => (
             <Link to={`/park-list/${parks.parkCode}`}>
               <li key={index}>
               <span>{parks.name}</span> 

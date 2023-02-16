@@ -30,13 +30,13 @@ export const Login = () => {
                 {!user ? (
                     <li>
                         <button className="login">
-                            <a href="https://server-6b0j.onrender.com/login">Login</a>
+                            <a href="http://localhost:3000/login">Login</a>
                         </button>
                     </li>
                     ) : (
                     <li>Hello, {user.given_name} 
                         <button className="login">
-                            <a href="https://server-6b0j.onrender.com/logout">Logout</a>
+                            <a href="http://localhost:3000/logout">Logout</a>
                         </button>
                     </li>
                 )}
