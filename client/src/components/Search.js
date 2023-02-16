@@ -1,37 +1,39 @@
-import React from 'react'
-import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import React from "react";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export const Search = () => {
-
   const [parks, setParks] = useState([]);
-  const [foundParks, setFoundParks] = useState(parks);
-  const [parkName, setName] = useState('');
+  const [matchingParks, setMatchingParks] = useState(parks);
+  const [parkName, setParkName] = useState("");
 
-  //to use in input to track each change the user types
-  const [query, setQuery] = useState("");
+  //to use in input for tracking each change the user types
 
   useEffect(() => {
     fetch("/api/parksInfo")
-    .then((response) => response.json())
-    .then(parks => {
-      setParks(parks.data);
-    })
+      .then((response) => response.json())
+      .then((parks) => {
+        setParks(parks.data);
+      });
   }, []);
 
-  const filter = (e) => {
-    const keyword = e.target.value;
 
-    if(keyword !== '') {
-      const results = parks.filter((park) => {
-        return park.name.toLowerCase().startsWith(keyword.toLowerCase());
-      });
-      setFoundParks(results);
+///CODE SAMPLE START
+
+  const filterParkNames = (e) => {
+    const keyword = e.target.value;
+    if (keyword === "") {
+      setMatchingParks(parks);
     } else {
-      setFoundParks(parks);
+      const match = parks.filter((park) =>
+        park.name.toLowerCase().startsWith(keyword.toLowerCase())
+      );
+      setMatchingParks(match);
     }
-      setName(keyword);
+    setParkName(keyword);
   };
+
+  //CODE SAMPLE END
 
   //Future: change css of bar
 
@@ -39,22 +41,28 @@ export const Search = () => {
     <div className="parkList">
       <div className="plBack">
         <h2>SEARCH PARK LIST:</h2>
-        <input type="search" value={parkName}placeholder="Enter Park Name" onChange={filter}/>
-        <br/>
+        <input
+          type="search"
+          value={parkName}
+          placeholder="Enter Park Name"
+          onChange={filterParkNames}
+        />
+        <br />
         <div className="parkItems">
-          {foundParks && foundParks.length > 0 ? (foundParks.map((parks, index) => (
-            <Link to={`/park-list/${parks.parkCode}`}>
-              <li key={index}>
-              <span>{parks.name}</span> 
-              <br/>
-              </li>
-            </Link>
-          ))
+          {matchingParks && matchingParks.length > 0 ? (
+            matchingParks.map((parks, index) => (
+              <Link to={`/park-list/${parks.parkCode}`}>
+                <li key={index}>
+                  <span>{parks.name}</span>
+                  <br />
+                </li>
+              </Link>
+            ))
           ) : (
             <h3>Results</h3>
           )}
         </div>
       </div>
-    </div>  
+    </div>
   );
-}
+};
