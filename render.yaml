@@ -11,7 +11,7 @@ services:
     plan: free
     type: web
     env: node
-    repo: https://github.com/GabyC0/wander
+    repo: https://github.com/GabyC0/wander/tree/auth0
     buildCommand: cd client && npm install && npm run build && cd ../server && npm install
     startCommand: cd server && node ./node_modules/db-migrate/bin/db-migrate up && node server.js
     envVars:
