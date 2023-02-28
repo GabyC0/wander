@@ -21,7 +21,7 @@ export const IndivPark = (props) => {
       setPark(park.data[0]);
       setImages(park.data[0].images)
     })
-  }, []);
+  }, [params.parkCode]);
 
   const postPark = async (newPark) => {
     return fetch(`/api/parkFave/${park.parkCode}/${park.fullName}`, {
