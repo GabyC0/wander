@@ -22,5 +22,5 @@ services:
 
 databases:
   - name: db
-    plan: free
+    plan: heroku-postgresql
     ipAllowList: []
