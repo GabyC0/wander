@@ -26,24 +26,23 @@ export const Login = () => {
 
   return (
     <div>
-        <div>
-                {!user ? (
-                    <li>
-                        <button className="login">
-                            <a href="https://server-6b0j.onrender.com/login">Login</a>
-                        </button>
-                    </li>
-                    ) : (
-                    <li>Hello, {user.given_name} 
-                        <button className="login">
-                            <a href="https://server-6b0j.onrender.com/logout">Logout</a>
-                        </button>
-                    </li>
-                )}
-        </div>
-        <div>
-            {!user}
-        </div>
+      <div>
+        {!user ? (
+          <li>
+            <button className="login">
+              <a href="https://wander-app1.herokuapp.com/login">Login</a>
+            </button>
+          </li>
+        ) : (
+          <li>
+            Hello, {user.given_name}
+            <button className="login">
+              <a href="https://wander-app1.herokuapp.com/logout">Logout</a>
+            </button>
+          </li>
+        )}
+      </div>
+      <div>{!user}</div>
     </div>
-  )
+  );
 }
