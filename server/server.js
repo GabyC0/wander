@@ -3,6 +3,7 @@ const cors = require('cors');
 const axios = require('axios').default;
 require("dotenv").config();
 const path = require('path');
+//const {Client} = requier('pg');
 const db = require('../server/db/db-connection.js'); 
 const fetch = require("node-fetch"); 
 const { auth } = require('express-openid-connect');
@@ -10,6 +11,26 @@ const { response } = require('express');
 const apiKey = `${process.env.API_KEY}`;
 const REACT_BUILD_DIR = path.join(__dirname, '..', 'client', 'build');
 const app = express();
+
+// const client = new Client({
+//   connectionString: process.env.DATABASE_URL,
+//   ssl: {
+//     rejectUnauthorized: false,
+//   },
+// });
+
+// client.connect();
+
+// client.query(
+//   "SELECT table_schema,table_name FROM information_schema.tables;",
+//   (err, res) => {
+//     if (err) throw err;
+//     for (let row of res.rows) {
+//       console.log(JSON.stringify(row));
+//     }
+//     client.end();
+//   }
+// );
 
 const config = {
     authRequired: false,
