@@ -49,6 +49,7 @@ export const Search = () => {
         />
         <br />
         <div className="parkItems">
+          <span>Results: </span>
           {matchingParks && matchingParks.length > 0 ? (
             matchingParks.map((parks, index) => (
               <Link to={`/park-list/${parks.parkCode}`}>
@@ -59,7 +60,7 @@ export const Search = () => {
               </Link>
             ))
           ) : (
-            <h3>Results</h3>
+            <span></span>
           )}
         </div>
       </div>
