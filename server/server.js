@@ -6,7 +6,7 @@ const path = require('path');
 const db = require('../server/db/db-connection.js'); 
 const fetch = require("node-fetch"); 
 const { auth } = require('express-openid-connect');
-const { response } = require('express');
+//const { response } = require('express');
 const apiKey = `${process.env.API_KEY}`;
 const REACT_BUILD_DIR = path.join(__dirname, '..', 'client', 'build');
 const app = express();
@@ -19,7 +19,6 @@ const config = {
     clientID: process.env.CLIENTID,
     issuerBaseURL: process.env.ISSUERBASEURL
 };
-
 
 const PORT = process.env.PORT || 3001;
 
@@ -50,7 +49,7 @@ app.get('/api/me', async (req, res) => {
         }
         res.json(req.oidc.user);
     } else {
-        res.status(401).json({error: "Error in the auth0"});
+        res.status(401).json({error: "Auth0 error"});
     }
 });
 
@@ -150,42 +149,10 @@ app.get("/api/campInfo/:parkCode", cors(), async (req, res) => {
     .then(function () {
         // always executed
     });
-// })
 })
 
-// console.log that your server is up and running
 app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`);
 });
 
-//for future development- live webcam footage
-
-//post request for park webcam the user is searching
-// let parkCodeName;
-// app.post("/api/webcam-park", (req, res) => {
-//     parkCodeName = req.body.parkCode;
-//     //change redirect??
-//     //res.redirect("/api?webcam");
-// })
-
-
-//get request for webcam
-//app.get("/api/webcam/:parkCode", cors(), async (req, res) => {
-    //is this where I should add park code to be used??? 
-    //const parkCode = req.params.parkCode;
-    //const url = `https://developer.nps.gov/api/v1/webcams?parkCode=${parkCode}&api_key=${apiKey}`;
-
-    //axios.get(url)
-    //.then(function (response) {
-        // handle success
-        //console.log(response.data);
-        //res.send(response.data);
-//})
-    //.catch(function (error) {
-        // handle error
-        //console.log(error);
-//})
-    //.then(function () {
-        // always executed
-//});
-//})
+//for future development- live webcam footage here
