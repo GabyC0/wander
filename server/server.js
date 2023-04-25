@@ -56,7 +56,7 @@ app.get('/api/me', async (req, res) => {
 
 
 //get parks list from the nps API
-app.get("/api/parksInfo", cors(), async (req, res) => {
+app.get("/api/getParksData", cors(), async (req, res) => {
     const url = `https://developer.nps.gov/api/v1/parks?limit=500&api_key=${apiKey}`;
     console.log("url", url);
     axios.get(url)
@@ -66,12 +66,13 @@ app.get("/api/parksInfo", cors(), async (req, res) => {
     })
         .catch(function (error) {
             // handle error
+            //future development: display an error on client side
             console.log(error);
     });
 });
 
 //get specific individual park information 
-app.get('/api/parksInfo/:parkCode', cors(), async (req, res) => {
+app.get('/api/getParksData/:parkCode', cors(), async (req, res) => {
     const parkCode = req.params.parkCode;
 
     const url = `https://developer.nps.gov/api/v1/parks?parkCode=${parkCode}&api_key=${apiKey}`;
@@ -89,7 +90,7 @@ app.get('/api/parksInfo/:parkCode', cors(), async (req, res) => {
 });
 
 //create the get request for users personal favorites list
-app.get('/api/userFave', cors(), async (req, res) => {
+app.get('/api/userParkList', cors(), async (req, res) => {
     if(req.oidc.isAuthenticated()) {
         const authUser = await db.query(`SELECT * FROM users WHERE email='${req.oidc.user.email}'`);
         console.log('authUser result', authUser.rows[0]);
@@ -121,7 +122,7 @@ app.post('/api/parkFave/:parkCode/:fullName', cors(), async (req, res) => {
 
 
 // // delete request
-app.delete('/api/userFave/:parkId', cors(), async (req, res) =>{
+app.delete('/api/userParkList/:parkId', cors(), async (req, res) =>{
 
     const parkId = req.params.parkId;
     //console.log(req.params);

@@ -10,7 +10,7 @@ export const Search = () => {
   //to use in input for tracking each change the user types
 
   useEffect(() => {
-    fetch("/api/parksInfo")
+    fetch("/api/getParksData")
       .then((response) => response.json())
       .then((parks) => {
         setParks(parks.data);

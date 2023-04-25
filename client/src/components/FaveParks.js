@@ -8,7 +8,7 @@ function FaveParks(props) {
     const [parks, setParks] = useState([]);
 
     const loadParks = () => {
-        fetch("/api/userFave")
+        fetch("/api/userParksList")
             .then((response) => response.json())
             .then(parks => {
                 setParks(parks);
@@ -24,7 +24,7 @@ function FaveParks(props) {
 
     // A function to handle the Delete funtionallity
     const onDelete = async (park) => {
-        return fetch(`/api/userFave/${park.id}`, {
+        return fetch(`/api/userParksList/${park.id}`, {
             method: "DELETE"
         }).then((response) => {
             if(response.ok) {

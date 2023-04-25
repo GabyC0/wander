@@ -14,7 +14,7 @@ export const IndivPark = (props) => {
 
 
   useEffect(() => {
-    fetch(`/api/parksInfo/${params.parkCode}`)
+    fetch(`/api/getParksData/${params.parkCode}`)
     .then((response) => response.json())
     .then(park => {
       

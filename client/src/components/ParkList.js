@@ -18,7 +18,7 @@ export const ParkList = () => {
 
   useEffect(
     () => {
-      fetch("/api/parksInfo")
+      fetch("/api/getParksData")
         .then((response) => response.json())
         .then((parks) => {
           //setPageCount(Math.ceil(parks.data.length/perPage))
